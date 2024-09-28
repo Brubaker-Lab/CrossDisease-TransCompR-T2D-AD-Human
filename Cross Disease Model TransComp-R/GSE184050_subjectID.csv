@@ -1,0 +1,117 @@
+﻿Group,Accession,Title,Source name,Disease state,Individual,Timepoint,Sex,Age,Tissue,Sample type
+-,GSM5576716,T2D case sample 1,"case subject 1, baseline",T2D case,case subject 1,baseline,female,64,peripheral blood,T2D baseline transcriptome
+-,GSM5576717,T2D case sample 2,"case subject 2, baseline",T2D case,case subject 2,baseline,female,47,peripheral blood,T2D baseline transcriptome
+-,GSM5576718,T2D case sample 3,"case subject 3, baseline",T2D case,case subject 3,baseline,male,67,peripheral blood,T2D baseline transcriptome
+-,GSM5576719,T2D case sample 4,"case subject 4, baseline",T2D case,case subject 4,baseline,female,52,peripheral blood,T2D baseline transcriptome
+-,GSM5576720,T2D case sample 5,"case subject 5, baseline",T2D case,case subject 5,baseline,female,61,peripheral blood,T2D baseline transcriptome
+-,GSM5576721,T2D case sample 6,"case subject 6, baseline",T2D case,case subject 6,baseline,female,54,peripheral blood,T2D baseline transcriptome
+-,GSM5576722,T2D case sample 7,"case subject 7, baseline",T2D case,case subject 7,baseline,male,48,peripheral blood,T2D baseline transcriptome
+-,GSM5576723,T2D case sample 8,"case subject 8, baseline",T2D case,case subject 8,baseline,female,62,peripheral blood,T2D baseline transcriptome
+-,GSM5576724,T2D case sample 9,"case subject 9, baseline",T2D case,case subject 9,baseline,female,30,peripheral blood,T2D baseline transcriptome
+-,GSM5576725,T2D case sample 10,"case subject 10, baseline",T2D case,case subject 10,baseline,female,64,peripheral blood,T2D baseline transcriptome
+-,GSM5576726,T2D case sample 11,"case subject 11, baseline",T2D case,case subject 11,baseline,male,64,peripheral blood,T2D baseline transcriptome
+-,GSM5576727,T2D case sample 12,"case subject 12, baseline",T2D case,case subject 12,baseline,male,45,peripheral blood,T2D baseline transcriptome
+-,GSM5576728,T2D case sample 13,"case subject 13, baseline",T2D case,case subject 13,baseline,female,48,peripheral blood,T2D baseline transcriptome
+-,GSM5576729,T2D case sample 14,"case subject 14, baseline",T2D case,case subject 14,baseline,female,67,peripheral blood,T2D baseline transcriptome
+-,GSM5576730,T2D case sample 15,"case subject 15, baseline",T2D case,case subject 15,baseline,female,55,peripheral blood,T2D baseline transcriptome
+-,GSM5576731,T2D case sample 16,"case subject 16, baseline",T2D case,case subject 16,baseline,female,41,peripheral blood,T2D baseline transcriptome
+-,GSM5576732,T2D case sample 17,"case subject 17, baseline",T2D case,case subject 17,baseline,male,59,peripheral blood,T2D baseline transcriptome
+-,GSM5576733,T2D case sample 18,"case subject 18, baseline",T2D case,case subject 18,baseline,female,28,peripheral blood,T2D baseline transcriptome
+-,GSM5576734,T2D case sample 19,"case subject 19, baseline",T2D case,case subject 19,baseline,female,51,peripheral blood,T2D baseline transcriptome
+-,GSM5576735,T2D case sample 20,"case subject 20, baseline",T2D case,case subject 20,baseline,female,52,peripheral blood,T2D baseline transcriptome
+-,GSM5576736,T2D case sample 21,"case subject 21, baseline",T2D case,case subject 21,baseline,female,52,peripheral blood,T2D baseline transcriptome
+-,GSM5576737,T2D case sample 22,"case subject 22, baseline",T2D case,case subject 22,baseline,female,65,peripheral blood,T2D baseline transcriptome
+-,GSM5576738,T2D case sample 23,"case subject 23, baseline",T2D case,case subject 23,baseline,female,33,peripheral blood,T2D baseline transcriptome
+-,GSM5576739,T2D case sample 24,"case subject 24, baseline",T2D case,case subject 24,baseline,female,68,peripheral blood,T2D baseline transcriptome
+-,GSM5576740,T2D case sample 25,"case subject 25, baseline",T2D case,case subject 25,baseline,female,34,peripheral blood,T2D baseline transcriptome
+-,GSM5576741,T2D case sample 26,"case subject 1, follow-up",T2D case,case subject 1,follow-up,female,65,peripheral blood,T2D follow-up transcriptome
+-,GSM5576742,T2D case sample 27,"case subject 2, follow-up",T2D case,case subject 2,follow-up,female,48,peripheral blood,T2D follow-up transcriptome
+-,GSM5576743,T2D case sample 28,"case subject 3, follow-up",T2D case,case subject 3,follow-up,male,69,peripheral blood,T2D follow-up transcriptome
+-,GSM5576744,T2D case sample 29,"case subject 4, follow-up",T2D case,case subject 4,follow-up,female,54,peripheral blood,T2D follow-up transcriptome
+-,GSM5576745,T2D case sample 30,"case subject 5, follow-up",T2D case,case subject 5,follow-up,female,61,peripheral blood,T2D follow-up transcriptome
+-,GSM5576746,T2D case sample 31,"case subject 6, follow-up",T2D case,case subject 6,follow-up,female,57,peripheral blood,T2D follow-up transcriptome
+-,GSM5576747,T2D case sample 32,"case subject 7, follow-up",T2D case,case subject 7,follow-up,male,50,peripheral blood,T2D follow-up transcriptome
+-,GSM5576748,T2D case sample 33,"case subject 8, follow-up",T2D case,case subject 8,follow-up,female,63,peripheral blood,T2D follow-up transcriptome
+-,GSM5576749,T2D case sample 34,"case subject 9, follow-up",T2D case,case subject 9,follow-up,female,30,peripheral blood,T2D follow-up transcriptome
+-,GSM5576750,T2D case sample 35,"case subject 10, follow-up",T2D case,case subject 10,follow-up,female,68,peripheral blood,T2D follow-up transcriptome
+-,GSM5576751,T2D case sample 36,"case subject 11, follow-up",T2D case,case subject 11,follow-up,male,65,peripheral blood,T2D follow-up transcriptome
+-,GSM5576752,T2D case sample 37,"case subject 12, follow-up",T2D case,case subject 12,follow-up,male,46,peripheral blood,T2D follow-up transcriptome
+-,GSM5576753,T2D case sample 38,"case subject 13, follow-up",T2D case,case subject 13,follow-up,female,49,peripheral blood,T2D follow-up transcriptome
+-,GSM5576754,T2D case sample 39,"case subject 14, follow-up",T2D case,case subject 14,follow-up,female,67,peripheral blood,T2D follow-up transcriptome
+-,GSM5576755,T2D case sample 40,"case subject 15, follow-up",T2D case,case subject 15,follow-up,female,57,peripheral blood,T2D follow-up transcriptome
+-,GSM5576756,T2D case sample 41,"case subject 16, follow-up",T2D case,case subject 16,follow-up,female,44,peripheral blood,T2D follow-up transcriptome
+-,GSM5576757,T2D case sample 42,"case subject 17, follow-up",T2D case,case subject 17,follow-up,male,60,peripheral blood,T2D follow-up transcriptome
+-,GSM5576758,T2D case sample 43,"case subject 18, follow-up",T2D case,case subject 18,follow-up,female,30,peripheral blood,T2D follow-up transcriptome
+-,GSM5576759,T2D case sample 44,"case subject 19, follow-up",T2D case,case subject 19,follow-up,female,55,peripheral blood,T2D follow-up transcriptome
+-,GSM5576760,T2D case sample 45,"case subject 20, follow-up",T2D case,case subject 20,follow-up,female,53,peripheral blood,T2D follow-up transcriptome
+-,GSM5576761,T2D case sample 46,"case subject 21, follow-up",T2D case,case subject 21,follow-up,female,56,peripheral blood,T2D follow-up transcriptome
+-,GSM5576762,T2D case sample 47,"case subject 22, follow-up",T2D case,case subject 22,follow-up,female,68,peripheral blood,T2D follow-up transcriptome
+-,GSM5576763,T2D case sample 48,"case subject 23, follow-up",T2D case,case subject 23,follow-up,female,33,peripheral blood,T2D follow-up transcriptome
+-,GSM5576764,T2D case sample 49,"case subject 24, follow-up",T2D case,case subject 24,follow-up,female,70,peripheral blood,T2D follow-up transcriptome
+-,GSM5576765,T2D case sample 50,"case subject 25, follow-up",T2D case,case subject 25,follow-up,female,34,peripheral blood,T2D follow-up transcriptome
+-,GSM5576766,Healthy control sample 1,"control subject 2, baseline",control,control subject 2,baseline,female,56,peripheral blood,Control baseline transcriptome
+-,GSM5576767,Healthy control sample 2,"control subject 31, baseline",control,control subject 31,baseline,female,57,peripheral blood,Control baseline transcriptome
+-,GSM5576768,Healthy control sample 3,"control subject 1, baseline",control,control subject 1,baseline,female,58,peripheral blood,Control baseline transcriptome
+-,GSM5576769,Healthy control sample 4,"control subject 3, baseline",control,control subject 3,baseline,female,56,peripheral blood,Control baseline transcriptome
+-,GSM5576770,Healthy control sample 5,"control subject 4, baseline",control,control subject 4,baseline,female,63,peripheral blood,Control baseline transcriptome
+-,GSM5576771,Healthy control sample 6,"control subject 5, baseline",control,control subject 5,baseline,female,50,peripheral blood,Control baseline transcriptome
+-,GSM5576772,Healthy control sample 7,"control subject 6, baseline",control,control subject 6,baseline,female,40,peripheral blood,Control baseline transcriptome
+-,GSM5576773,Healthy control sample 8,"control subject 7, baseline",control,control subject 7,baseline,female,48,peripheral blood,Control baseline transcriptome
+-,GSM5576774,Healthy control sample 9,"control subject 8, baseline",control,control subject 8,baseline,female,61,peripheral blood,Control baseline transcriptome
+-,GSM5576775,Healthy control sample 10,"control subject 9, baseline",control,control subject 9,baseline,female,43,peripheral blood,Control baseline transcriptome
+-,GSM5576776,Healthy control sample 11,"control subject 10, baseline",control,control subject 10,baseline,female,45,peripheral blood,Control baseline transcriptome
+-,GSM5576777,Healthy control sample 12,"control subject 11, baseline",control,control subject 11,baseline,female,40,peripheral blood,Control baseline transcriptome
+-,GSM5576778,Healthy control sample 13,"control subject 12, baseline",control,control subject 12,baseline,male,62,peripheral blood,Control baseline transcriptome
+-,GSM5576779,Healthy control sample 14,"control subject 13, baseline",control,control subject 13,baseline,female,30,peripheral blood,Control baseline transcriptome
+-,GSM5576780,Healthy control sample 15,"control subject 14, baseline",control,control subject 14,baseline,male,77,peripheral blood,Control baseline transcriptome
+-,GSM5576781,Healthy control sample 16,"control subject 15, baseline",control,control subject 15,baseline,female,58,peripheral blood,Control baseline transcriptome
+-,GSM5576782,Healthy control sample 17,"control subject 16, baseline",control,control subject 16,baseline,female,65,peripheral blood,Control baseline transcriptome
+-,GSM5576783,Healthy control sample 18,"control subject 17, baseline",control,control subject 17,baseline,female,44,peripheral blood,Control baseline transcriptome
+-,GSM5576784,Healthy control sample 19,"control subject 18, baseline",control,control subject 18,baseline,female,43,peripheral blood,Control baseline transcriptome
+-,GSM5576785,Healthy control sample 20,"control subject 19, baseline",control,control subject 19,baseline,male,83,peripheral blood,Control baseline transcriptome
+-,GSM5576786,Healthy control sample 21,"control subject 20, baseline",control,control subject 20,baseline,male,40,peripheral blood,Control baseline transcriptome
+-,GSM5576787,Healthy control sample 22,"control subject 21, baseline",control,control subject 21,baseline,male,40,peripheral blood,Control baseline transcriptome
+-,GSM5576788,Healthy control sample 23,"control subject 22, baseline",control,control subject 22,baseline,female,46,peripheral blood,Control baseline transcriptome
+-,GSM5576789,Healthy control sample 24,"control subject 23, baseline",control,control subject 23,baseline,female,60,peripheral blood,Control baseline transcriptome
+-,GSM5576790,Healthy control sample 25,"control subject 24, baseline",control,control subject 24,baseline,female,50,peripheral blood,Control baseline transcriptome
+-,GSM5576791,Healthy control sample 26,"control subject 25, baseline",control,control subject 25,baseline,female,63,peripheral blood,Control baseline transcriptome
+-,GSM5576792,Healthy control sample 27,"control subject 26, baseline",control,control subject 26,baseline,female,69,peripheral blood,Control baseline transcriptome
+-,GSM5576793,Healthy control sample 28,"control subject 27, baseline",control,control subject 27,baseline,female,48,peripheral blood,Control baseline transcriptome
+-,GSM5576794,Healthy control sample 29,"control subject 28, baseline",control,control subject 28,baseline,female,86,peripheral blood,Control baseline transcriptome
+-,GSM5576795,Healthy control sample 30,"control subject 29, baseline",control,control subject 29,baseline,female,47,peripheral blood,Control baseline transcriptome
+-,GSM5576796,Healthy control sample 31,"control subject 30, baseline",control,control subject 30,baseline,female,39,peripheral blood,Control baseline transcriptome
+-,GSM5576797,Healthy control sample 32,"control subject 32, baseline",control,control subject 32,baseline,female,56,peripheral blood,Control baseline transcriptome
+-,GSM5576798,Healthy control sample 33,"control subject 33, baseline",control,control subject 33,baseline,female,50,peripheral blood,Control baseline transcriptome
+-,GSM5576799,Healthy control sample 34,"control subject 2, follow-up",control,control subject 2,follow-up,female,58,peripheral blood,Control follow-up transcriptome
+-,GSM5576800,Healthy control sample 35,"control subject 31, follow-up",control,control subject 31,follow-up,female,57,peripheral blood,Control follow-up transcriptome
+-,GSM5576801,Healthy control sample 36,"control subject 1, follow-up",control,control subject 1,follow-up,female,60,peripheral blood,Control follow-up transcriptome
+-,GSM5576802,Healthy control sample 37,"control subject 3, follow-up",control,control subject 3,follow-up,female,57,peripheral blood,Control follow-up transcriptome
+-,GSM5576803,Healthy control sample 38,"control subject 4, follow-up",control,control subject 4,follow-up,female,67,peripheral blood,Control follow-up transcriptome
+-,GSM5576804,Healthy control sample 39,"control subject 5, follow-up",control,control subject 5,follow-up,female,54,peripheral blood,Control follow-up transcriptome
+-,GSM5576805,Healthy control sample 40,"control subject 6, follow-up",control,control subject 6,follow-up,female,41,peripheral blood,Control follow-up transcriptome
+-,GSM5576806,Healthy control sample 41,"control subject 7, follow-up",control,control subject 7,follow-up,female,50,peripheral blood,Control follow-up transcriptome
+-,GSM5576807,Healthy control sample 42,"control subject 8, follow-up",control,control subject 8,follow-up,female,64,peripheral blood,Control follow-up transcriptome
+-,GSM5576808,Healthy control sample 43,"control subject 9, follow-up",control,control subject 9,follow-up,female,45,peripheral blood,Control follow-up transcriptome
+-,GSM5576809,Healthy control sample 44,"control subject 10, follow-up",control,control subject 10,follow-up,female,47,peripheral blood,Control follow-up transcriptome
+-,GSM5576810,Healthy control sample 45,"control subject 11, follow-up",control,control subject 11,follow-up,female,42,peripheral blood,Control follow-up transcriptome
+-,GSM5576811,Healthy control sample 46,"control subject 12, follow-up",control,control subject 12,follow-up,male,65,peripheral blood,Control follow-up transcriptome
+-,GSM5576812,Healthy control sample 47,"control subject 13, follow-up",control,control subject 13,follow-up,female,33,peripheral blood,Control follow-up transcriptome
+-,GSM5576813,Healthy control sample 48,"control subject 14, follow-up",control,control subject 14,follow-up,male,80,peripheral blood,Control follow-up transcriptome
+-,GSM5576814,Healthy control sample 49,"control subject 15, follow-up",control,control subject 15,follow-up,female,61,peripheral blood,Control follow-up transcriptome
+-,GSM5576815,Healthy control sample 50,"control subject 16, follow-up",control,control subject 16,follow-up,female,67,peripheral blood,Control follow-up transcriptome
+-,GSM5576816,Healthy control sample 51,"control subject 17, follow-up",control,control subject 17,follow-up,female,47,peripheral blood,Control follow-up transcriptome
+-,GSM5576817,Healthy control sample 52,"control subject 18, follow-up",control,control subject 18,follow-up,female,47,peripheral blood,Control follow-up transcriptome
+-,GSM5576818,Healthy control sample 53,"control subject 19, follow-up",control,control subject 19,follow-up,male,85,peripheral blood,Control follow-up transcriptome
+-,GSM5576819,Healthy control sample 54,"control subject 20, follow-up",control,control subject 20,follow-up,male,43,peripheral blood,Control follow-up transcriptome
+-,GSM5576820,Healthy control sample 55,"control subject 21, follow-up",control,control subject 21,follow-up,male,41,peripheral blood,Control follow-up transcriptome
+-,GSM5576821,Healthy control sample 56,"control subject 22, follow-up",control,control subject 22,follow-up,female,49,peripheral blood,Control follow-up transcriptome
+-,GSM5576822,Healthy control sample 57,"control subject 23, follow-up",control,control subject 23,follow-up,female,62,peripheral blood,Control follow-up transcriptome
+-,GSM5576823,Healthy control sample 58,"control subject 24, follow-up",control,control subject 24,follow-up,female,53,peripheral blood,Control follow-up transcriptome
+-,GSM5576824,Healthy control sample 59,"control subject 25, follow-up",control,control subject 25,follow-up,female,65,peripheral blood,Control follow-up transcriptome
+-,GSM5576825,Healthy control sample 60,"control subject 26, follow-up",control,control subject 26,follow-up,female,71,peripheral blood,Control follow-up transcriptome
+-,GSM5576826,Healthy control sample 61,"control subject 27, follow-up",control,control subject 27,follow-up,female,51,peripheral blood,Control follow-up transcriptome
+-,GSM5576827,Healthy control sample 62,"control subject 28, follow-up",control,control subject 28,follow-up,female,87,peripheral blood,Control follow-up transcriptome
+-,GSM5576828,Healthy control sample 63,"control subject 29, follow-up",control,control subject 29,follow-up,female,50,peripheral blood,Control follow-up transcriptome
+-,GSM5576829,Healthy control sample 64,"control subject 30, follow-up",control,control subject 30,follow-up,female,42,peripheral blood,Control follow-up transcriptome
+-,GSM5576830,Healthy control sample 65,"control subject 32, follow-up",control,control subject 32,follow-up,female,60,peripheral blood,Control follow-up transcriptome
+-,GSM5576831,Healthy control sample 66,"control subject 33, follow-up",control,control subject 33,follow-up,female,52,peripheral blood,Control follow-up transcriptome

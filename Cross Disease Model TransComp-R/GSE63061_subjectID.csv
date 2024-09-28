@@ -1,0 +1,389 @@
+﻿Group,Accession,Title,Source name,Status,Ethnicity,Age,Gender,Included in case -control study,Tissue
+-,GSM1539409,7196843065_F,Blood,MCI,Western European,57,Female,yes,blood
+-,GSM1539410,7196843076_G,Blood,MCI,Western European,59,Female,yes,blood
+-,GSM1539411,7196843068_B,Blood,MCI,Western European,63,Female,yes,blood
+-,GSM1539412,7196843063_B,Blood,MCI,Western European,65,Female,yes,blood
+-,GSM1539413,7196843065_L,Blood,MCI,Other Caucasian,66,Female,yes,blood
+-,GSM1539414,7196843066_H,Blood,MCI,Other Caucasian,68,Female,yes,blood
+-,GSM1539415,7943280031_C,Blood,MCI,Western European,68,Female,yes,blood
+-,GSM1539416,7943280031_J,Blood,MCI,Any_Other_White_Background,68,Female,yes,blood
+-,GSM1539417,7196843035_B,Blood,MCI,Western European,69,Female,yes,blood
+-,GSM1539418,7196843053_L,Blood,MCI,Western European,69,Female,yes,blood
+-,GSM1539419,7196843054_D,Blood,MCI,Western European,70,Female,yes,blood
+-,GSM1539420,7196843062_G,Blood,MCI,Other Caucasian,70,Female,yes,blood
+-,GSM1539421,7196843007_J,Blood,MCI,Western European,71,Female,yes,blood
+-,GSM1539422,7196843054_B,Blood,MCI,Western European,71,Female,yes,blood
+-,GSM1539423,7196843063_A,Blood,MCI,Other Caucasian,71,Female,yes,blood
+-,GSM1539424,7348931013_E,Blood,MCI,Caribbean,71,Female,yes,blood
+-,GSM1539425,7196843035_I,Blood,MCI,Western European,73,Female,yes,blood
+-,GSM1539426,7196843054_A,Blood,MCI,Irish,73,Female,yes,blood
+-,GSM1539427,7196843072_E,Blood,MCI,Western European,73,Female,yes,blood
+-,GSM1539428,7196843076_H,Blood,MCI,Western European,73,Female,yes,blood
+-,GSM1539429,7348931005_D,Blood,MCI,Western European,74,Female,yes,blood
+-,GSM1539430,7196843032_I,Blood,MCI,Western European,75,Female,yes,blood
+-,GSM1539431,7943280031_B,Blood,MCI,Western European,64,Male,yes,blood
+-,GSM1539432,7196843007_E,Blood,MCI,Other Caucasian,66,Male,yes,blood
+-,GSM1539433,7348931005_L,Blood,MCI,Western European,71,Male,yes,blood
+-,GSM1539434,7348931019_J,Blood,MCI,Western European,71,Male,yes,blood
+-,GSM1539435,7943280008_G,Blood,MCI,Other Caucasian,71,Male,yes,blood
+-,GSM1539436,7196843090_B,Blood,MCI,Western European,75,Male,yes,blood
+-,GSM1539437,7964814028_H,Blood,MCI,Western European,75,Male,yes,blood
+-,GSM1539438,7964814051_K,Blood,MCI,British,75,Male,yes,blood
+-,GSM1539439,7943280031_D,Blood,CTL,Western European,63,Female,yes,blood
+-,GSM1539440,7196843072_B,Blood,CTL,Indian,65,Female,yes,blood
+-,GSM1539441,7196843072_F,Blood,CTL,Western European,65,Female,yes,blood
+-,GSM1539442,7196843053_A,Blood,CTL,Western European,66,Female,yes,blood
+-,GSM1539443,7196843076_F,Blood,CTL,Western European,66,Female,yes,blood
+-,GSM1539444,7348931014_E,Blood,CTL,Western European,66,Female,yes,blood
+-,GSM1539445,7348931014_I,Blood,CTL,British_English,66,Female,yes,blood
+-,GSM1539446,7348931018_C,Blood,CTL,Western European,66,Female,yes,blood
+-,GSM1539447,7348931013_F,Blood,CTL,Western European,67,Female,yes,blood
+-,GSM1539448,7196843052_B,Blood,CTL,Western European,68,Female,yes,blood
+-,GSM1539449,7348931005_A,Blood,CTL,British English,68,Female,yes,blood
+-,GSM1539450,7943280031_L,Blood,CTL,Other Caucasian,68,Female,yes,blood
+-,GSM1539451,7196843062_B,Blood,CTL,Western European,69,Female,yes,blood
+-,GSM1539452,7196843066_K,Blood,CTL,British_English,69,Female,yes,blood
+-,GSM1539453,7348931013_A,Blood,CTL,Any_Other_White_Background,69,Female,yes,blood
+-,GSM1539454,7196843066_B,Blood,CTL,British_English,70,Female,yes,blood
+-,GSM1539455,7196843072_H,Blood,CTL,British_English,70,Female,yes,blood
+-,GSM1539456,7348931019_E,Blood,CTL,Western European,70,Female,yes,blood
+-,GSM1539457,7964814051_D,Blood,CTL,British_English,70,Female,yes,blood
+-,GSM1539458,7196835071_C,Blood,CTL,Western European,71,Female,yes,blood
+-,GSM1539459,7196835071_D,Blood,CTL,British_English,71,Female,yes,blood
+-,GSM1539460,7196835090_B,Blood,CTL,British_Welsh,71,Female,yes,blood
+-,GSM1539461,7196843032_H,Blood,CTL,Western European,71,Female,yes,blood
+-,GSM1539462,7196843036_K,Blood,CTL,Western European,71,Female,yes,blood
+-,GSM1539463,7196843073_D,Blood,CTL,Any_Other_White_Background,71,Female,yes,blood
+-,GSM1539464,7196843091_H,Blood,CTL,Any_Other_Asian_Background,71,Female,yes,blood
+-,GSM1539465,7348931005_E,Blood,CTL,Other Caucasian,71,Female,yes,blood
+-,GSM1539466,7943280008_L,Blood,CTL,Western European,71,Female,yes,blood
+-,GSM1539467,7964814064_L,Blood,CTL,Western European,71,Female,yes,blood
+-,GSM1539468,7348931007_B,Blood,CTL,Western European,72,Female,yes,blood
+-,GSM1539469,7348931015_L,Blood,CTL,British_English,72,Female,yes,blood
+-,GSM1539470,7964814028_I,Blood,CTL,British_English,72,Female,yes,blood
+-,GSM1539471,7964814064_C,Blood,CTL,British_English,72,Female,yes,blood
+-,GSM1539472,7196843035_L,Blood,CTL,British_English,73,Female,yes,blood
+-,GSM1539473,7196843090_C,Blood,CTL,Western European,73,Female,yes,blood
+-,GSM1539474,7348931019_D,Blood,CTL,Western European,73,Female,yes,blood
+-,GSM1539475,7196835071_A,Blood,CTL,British_English,74,Female,yes,blood
+-,GSM1539476,7196843073_B,Blood,CTL,Other Caucasian,74,Female,yes,blood
+-,GSM1539477,7196843073_G,Blood,CTL,Western European,74,Female,yes,blood
+-,GSM1539478,7196843076_J,Blood,CTL,Irish,74,Female,yes,blood
+-,GSM1539479,7348931007_A,Blood,CTL,Western European,74,Female,yes,blood
+-,GSM1539480,7964814051_B,Blood,CTL,British_English,74,Female,yes,blood
+-,GSM1539481,7196843036_A,Blood,CTL,British_English,75,Female,yes,blood
+-,GSM1539482,7196843062_I,Blood,CTL,Western European,75,Female,yes,blood
+-,GSM1539483,7196843076_L,Blood,CTL,British_English,75,Female,yes,blood
+-,GSM1539484,7196843053_B,Blood,CTL,Western European,67,Male,yes,blood
+-,GSM1539485,7196843091_B,Blood,CTL,Western European,68,Male,yes,blood
+-,GSM1539486,7196843091_F,Blood,CTL,British_English,68,Male,yes,blood
+-,GSM1539487,7964814051_L,Blood,CTL,British_English,68,Male,yes,blood
+-,GSM1539488,7196835071_G,Blood,CTL,British_English,69,Male,yes,blood
+-,GSM1539489,7196843068_D,Blood,CTL,Other Caucasian,69,Male,yes,blood
+-,GSM1539490,7348931005_F,Blood,CTL,Western European,69,Male,yes,blood
+-,GSM1539491,7196843053_H,Blood,CTL,Western European,70,Male,yes,blood
+-,GSM1539492,7196843054_J,Blood,CTL,Western European,70,Male,yes,blood
+-,GSM1539493,7196843090_E,Blood,CTL,British_English,70,Male,yes,blood
+-,GSM1539494,7196843062_A,Blood,CTL,Western European,71,Male,yes,blood
+-,GSM1539495,7943280031_A,Blood,CTL,Western European,71,Male,yes,blood
+-,GSM1539496,7964814051_C,Blood,CTL,British_English,71,Male,yes,blood
+-,GSM1539497,7196843081_F,Blood,CTL,British_English,72,Male,yes,blood
+-,GSM1539498,7943280008_F,Blood,CTL,British_English,72,Male,yes,blood
+-,GSM1539499,7964814051_A,Blood,CTL,British_English,72,Male,yes,blood
+-,GSM1539500,7196843032_G,Blood,CTL,Western European,73,Male,yes,blood
+-,GSM1539501,7196843054_H,Blood,CTL,White_And_Asian,73,Male,yes,blood
+-,GSM1539502,7348931007_K,Blood,CTL,Other Caucasian,73,Male,yes,blood
+-,GSM1539503,7348931013_K,Blood,CTL,British_English,73,Male,yes,blood
+-,GSM1539504,7348931018_L,Blood,CTL,British_English,73,Male,yes,blood
+-,GSM1539505,7964814028_D,Blood,CTL,Western European,73,Male,yes,blood
+-,GSM1539506,7348931005_J,Blood,CTL,Any_Other_White_Background,74,Male,yes,blood
+-,GSM1539507,7348931019_A,Blood,CTL,Western European,74,Male,yes,blood
+-,GSM1539508,7964814028_G,Blood,CTL,Western European,74,Male,yes,blood
+-,GSM1539509,7196843090_L,Blood,CTL,British_English,75,Male,yes,blood
+-,GSM1539510,7348931015_A,Blood,CTL,British_English,75,Male,yes,blood
+-,GSM1539511,7348931018_E,Blood,AD,Western European,59,Female,yes,blood
+-,GSM1539512,7196843036_C,Blood,AD,British_Scottish,60,Female,yes,blood
+-,GSM1539513,7348931015_F,Blood,AD,British_English,61,Female,yes,blood
+-,GSM1539514,7943280031_H,Blood,AD,Western European,63,Female,yes,blood
+-,GSM1539515,7196843063_J,Blood,AD,Western European,64,Female,yes,blood
+-,GSM1539516,7196835090_A,Blood,AD,Western European,66,Female,yes,blood
+-,GSM1539517,7196843081_J,Blood,AD,Western European,67,Female,yes,blood
+-,GSM1539518,7348931019_K,Blood,AD,Western European,67,Female,yes,blood
+-,GSM1539519,7196843091_J,Blood,AD,Western European,68,Female,yes,blood
+-,GSM1539520,7348931015_H,Blood,AD,Western European,68,Female,yes,blood
+-,GSM1539521,7196843068_I,Blood,AD,Western European,69,Female,yes,blood
+-,GSM1539522,7196843069_G,Blood,AD,Western European,69,Female,yes,blood
+-,GSM1539523,7196843063_C,Blood,AD,Western European,70,Female,yes,blood
+-,GSM1539524,7196843090_I,Blood,AD,Western European,70,Female,yes,blood
+-,GSM1539525,7196843063_L,Blood,AD,Western European,71,Female,yes,blood
+-,GSM1539526,7348931019_H,Blood,AD,Western European,71,Female,yes,blood
+-,GSM1539527,7196843052_C,Blood,AD,Other Caucasian,73,Female,yes,blood
+-,GSM1539528,7196843065_C,Blood,AD,Other Caucasian,73,Female,yes,blood
+-,GSM1539529,7196843073_C,Blood,AD,British_Scottish,74,Female,yes,blood
+-,GSM1539530,7964814051_F,Blood,AD,Western European,74,Female,yes,blood
+-,GSM1539531,7196835071_B,Blood,AD,Other Caucasian,75,Female,yes,blood
+-,GSM1539532,7196843072_A,Blood,AD,Western European,75,Female,yes,blood
+-,GSM1539533,7196843072_L,Blood,AD,British_English,75,Female,yes,blood
+-,GSM1539534,7196843091_A,Blood,AD,British_English,62,Male,yes,blood
+-,GSM1539535,7943280008_E,Blood,AD,British_English,66,Male,yes,blood
+-,GSM1539536,7196843081_E,Blood,AD,Western European,69,Male,yes,blood
+-,GSM1539537,7196843036_D,Blood,AD,Western European,70,Male,yes,blood
+-,GSM1539538,7196843069_J,Blood,AD,Western European,70,Male,yes,blood
+-,GSM1539539,7196843053_D,Blood,AD,Western European,71,Male,yes,blood
+-,GSM1539540,7196843062_E,Blood,AD,Western European,71,Male,yes,blood
+-,GSM1539541,7196843007_L,Blood,AD,British_English,72,Male,yes,blood
+-,GSM1539542,7196843052_L,Blood,AD,Irish,72,Male,yes,blood
+-,GSM1539543,7196843072_K,Blood,AD,Western European,72,Male,yes,blood
+-,GSM1539544,7196843007_A,Blood,AD,Western European,73,Male,yes,blood
+-,GSM1539545,7196843036_I,Blood,AD,Western European,73,Male,yes,blood
+-,GSM1539546,7348931005_H,Blood,AD,British_English,73,Male,yes,blood
+-,GSM1539547,7196843007_G,Blood,AD,British_English,74,Male,yes,blood
+-,GSM1539548,7348931007_L,Blood,AD,Western European,74,Male,yes,blood
+-,GSM1539549,7964814064_H,Blood,AD,British_English,74,Male,yes,blood
+-,GSM1539550,7196835071_H,Blood,AD,British_English,75,Male,yes,blood
+-,GSM1539551,7196843081_A,Blood,MCI,British_Other_Background,85,Female,no,blood
+-,GSM1539552,7196843081_B,Blood,CTL,British_English,81,Female,no,blood
+-,GSM1539553,7196843081_C,Blood,CTL,Western European,77,Female,no,blood
+-,GSM1539554,7196843081_D,Blood,AD,British_English,82,Male,no,blood
+-,GSM1539555,7196843081_G,Blood,CTL,Western European,83,Male,no,blood
+-,GSM1539556,7196843081_H,Blood,MCI,British,88,Female,no,blood
+-,GSM1539557,7196843081_I,Blood,MCI,Western European,84,Male,no,blood
+-,GSM1539558,7196843081_K,Blood,MCI,Western European,84,Male,no,blood
+-,GSM1539559,7196843081_L,Blood,MCI,Western European,78,Male,no,blood
+-,GSM1539560,7196843052_A,Blood,AD,Western European,80,Male,no,blood
+-,GSM1539561,7196843052_D,Blood,MCI,Irish,78,Female,no,blood
+-,GSM1539562,7196843052_E,Blood,AD,Other Caucasian,78,Female,no,blood
+-,GSM1539563,7196843052_F,Blood,AD,Other Caucasian,77,Male,no,blood
+-,GSM1539564,7196843052_G,Blood,MCI,Any_Other_Ethnic_Background,80,Female,no,blood
+-,GSM1539565,7196843052_H,Blood,MCI,British,79,Male,no,blood
+-,GSM1539566,7196843052_I,Blood,MCI,Western European,82,Female,no,blood
+-,GSM1539567,7196843052_J,Blood,MCI,Western European,89,Female,no,blood
+-,GSM1539568,7196843052_K,Blood,MCI,Asian,79,Male,no,blood
+-,GSM1539569,7196843090_A,Blood,CTL,Western European,78,Female,no,blood
+-,GSM1539570,7196843090_D,Blood,AD,Western European,77,Female,no,blood
+-,GSM1539571,7196843090_F,Blood,AD,Western European,85,Female,no,blood
+-,GSM1539572,7196843090_G,Blood,MCI,British,77,Female,no,blood
+-,GSM1539573,7196843090_H,Blood,CTL,British_English,89,Female,no,blood
+-,GSM1539574,7196843090_J,Blood,MCI,Western European,79,Male,no,blood
+-,GSM1539575,7196843090_K,Blood,AD,Western European,88,Female,no,blood
+-,GSM1539576,7964814051_G,Blood,AD,British_English,84,Male,no,blood
+-,GSM1539577,7964814051_H,Blood,AD,Any_Other_White_Background,79,Female,no,blood
+-,GSM1539578,7964814051_I,Blood,CTL,Western European,81,Male,no,blood
+-,GSM1539579,7964814051_J,Blood,AD,Western European,81,Female,no,blood
+-,GSM1539580,7196843066_A,Blood,CTL,Western European,81,Female,no,blood
+-,GSM1539581,7196843066_D,Blood,AD,Western European,82,Male,no,blood
+-,GSM1539582,7196843066_E,Blood,AD,Western European,84,Female,no,blood
+-,GSM1539583,7196843066_F,Blood,AD,Western European,80,Male,no,blood
+-,GSM1539584,7196843066_G,Blood,MCI,Western European,76,Female,no,blood
+-,GSM1539585,7196843066_I,Blood,CTL,Western European,79,Female,no,blood
+-,GSM1539586,7196843066_L,Blood,AD,Western European,78,Female,no,blood
+-,GSM1539587,7196843035_A,Blood,AD,British_English,78,Male,no,blood
+-,GSM1539588,7196843035_C,Blood,CTL,British_English,84,Female,no,blood
+-,GSM1539589,7196843035_D,Blood,AD,British_Other_Background,82,Female,no,blood
+-,GSM1539590,7196843035_E,Blood,MCI,Western European,80,Male,no,blood
+-,GSM1539591,7196843035_F,Blood,MCI,British_English,85,Male,no,blood
+-,GSM1539592,7196843035_G,Blood,MCI,Western European,86,Female,no,blood
+-,GSM1539593,7196843035_H,Blood,AD,Western European,95,Female,no,blood
+-,GSM1539594,7196843035_J,Blood,MCI,British_English,78,Female,no,blood
+-,GSM1539595,7196843035_K,Blood,CTL,British_English,80,Male,no,blood
+-,GSM1539596,7348931018_A,Blood,CTL,Western European,80,Female,no,blood
+-,GSM1539597,7348931018_B,Blood,CTL,Other Caucasian,78,Male,no,blood
+-,GSM1539598,7348931018_D,Blood,MCI,Western European,77,Female,no,blood
+-,GSM1539599,7348931018_F,Blood,AD,Western European,85,Female,no,blood
+-,GSM1539600,7348931018_G,Blood,CTL,Western European,76,Male,no,blood
+-,GSM1539601,7348931018_H,Blood,CTL,Western European,83,Male,no,blood
+-,GSM1539602,7348931018_J,Blood,MCI,British_English,86,Female,no,blood
+-,GSM1539603,7348931018_K,Blood,CTL,British_English,81,Male,no,blood
+-,GSM1539604,7196843072_D,Blood,AD,Any_Other_White_Background,82,Female,no,blood
+-,GSM1539605,7196843072_G,Blood,CTL,Western European,82,Female,no,blood
+-,GSM1539606,7196843072_I,Blood,AD,Western European,79,Female,no,blood
+-,GSM1539607,7196843072_J,Blood,CTL,British_English,76,Female,no,blood
+-,GSM1539608,7196843053_C,Blood,MCI,British_English,83,Male,no,blood
+-,GSM1539609,7196843053_E,Blood,MCI,Western European,79,Male,no,blood
+-,GSM1539610,7196843053_F,Blood,MCI,Western European,76,Male,no,blood
+-,GSM1539611,7196843053_G,Blood,MCI,British_English,81,Female,no,blood
+-,GSM1539612,7196843053_I,Blood,MCI,Western European,79,Female,no,blood
+-,GSM1539613,7196843053_J,Blood,AD,British_English,88,Female,no,blood
+-,GSM1539614,7196843053_K,Blood,MCI,Other Caucasian,77,Female,no,blood
+-,GSM1539615,7196843073_A,Blood,CTL,British_English,86,Male,no,blood
+-,GSM1539616,7196843073_E,Blood,AD,British_English,77,Male,no,blood
+-,GSM1539617,7196843073_F,Blood,CTL,Western European,81,Male,no,blood
+-,GSM1539618,7196843073_H,Blood,MCI,British_English,80,Male,no,blood
+-,GSM1539619,7196843073_I,Blood,AD,Western European,82,Male,no,blood
+-,GSM1539620,7196843073_J,Blood,MCI,British,93,Male,no,blood
+-,GSM1539621,7196843073_K,Blood,CTL,Western European,79,Female,no,blood
+-,GSM1539622,7196843073_L,Blood,MCI,British_English,78,Male,no,blood
+-,GSM1539623,7196843032_A,Blood,AD,Western European,78,Male,no,blood
+-,GSM1539624,7196843032_B,Blood,AD,Western European,85,Female,no,blood
+-,GSM1539625,7196843032_C,Blood,MCI,British,91,Female,no,blood
+-,GSM1539626,7196843032_D,Blood,AD,Other Caucasian,87,Female,no,blood
+-,GSM1539627,7196843032_E,Blood,AD,Other Caucasian,78,Male,no,blood
+-,GSM1539628,7196843032_F,Blood,MCI,Caribbean,78,Female,no,blood
+-,GSM1539629,7196843032_J,Blood,AD,Western European,83,Female,no,blood
+-,GSM1539630,7196843032_K,Blood,AD,Western European,78,Female,no,blood
+-,GSM1539631,7196843032_L,Blood,MCI,White_And_Asian,81,Male,no,blood
+-,GSM1539632,7196843063_D,Blood,AD,British_Welsh,79,Female,no,blood
+-,GSM1539633,7196843063_E,Blood,MCI,British_English,75,Male,no,blood
+-,GSM1539634,7196843063_F,Blood,AD,Western European,80,Female,no,blood
+-,GSM1539635,7196843063_G,Blood,MCI,Western European,77,Male,no,blood
+-,GSM1539636,7196843063_H,Blood,MCI,Western European,76,Female,no,blood
+-,GSM1539637,7196843063_I,Blood,AD,Western European,81,Female,no,blood
+-,GSM1539638,7348931019_B,Blood,MCI,British_English,89,Male,no,blood
+-,GSM1539639,7348931019_C,Blood,MCI,Western European,79,Male,no,blood
+-,GSM1539640,7348931019_F,Blood,MCI,Western European,81,Female,no,blood
+-,GSM1539641,7348931019_G,Blood,AD,British_English,88,Male,no,blood
+-,GSM1539642,7348931019_I,Blood,MCI,Western European,84,Female,no,blood
+-,GSM1539643,7348931019_L,Blood,AD,Indian,80,Female,no,blood
+-,GSM1539644,7964814041_A,Blood,AD,Irish,88,Female,no,blood
+-,GSM1539645,7964814041_B,Blood,MCI,Western European,76,Male,no,blood
+-,GSM1539646,7964814041_C,Blood,AD,Western European,76,Female,no,blood
+-,GSM1539647,7964814041_D,Blood,AD,Western European,66,Male,no,blood
+-,GSM1539648,7964814041_E,Blood,AD,Western European,78,Female,no,blood
+-,GSM1539649,7964814041_F,Blood,CTL,Irish,82,Female,no,blood
+-,GSM1539650,7964814041_G,Blood,AD,Western European,83,Male,no,blood
+-,GSM1539651,7964814041_H,Blood,CTL,Western European,66,Female,no,blood
+-,GSM1539652,7964814041_I,Blood,CTL,British_English,82,Male,no,blood
+-,GSM1539653,7964814041_J,Blood,CTL,British_English,75,Male,no,blood
+-,GSM1539654,7964814041_K,Blood,MCI,Caribbean,79,Male,no,blood
+-,GSM1539655,7964814041_L,Blood,CTL,Western European,79,Male,no,blood
+-,GSM1539656,7943280031_E,Blood,AD,Western European,82,Male,no,blood
+-,GSM1539657,7943280031_F,Blood,MCI,British English,85,Male,no,blood
+-,GSM1539658,7943280031_G,Blood,MCI,Any_Other_White_Background,78,Female,no,blood
+-,GSM1539659,7943280031_I,Blood,MCI,Any_Other_White_Background,79,Female,no,blood
+-,GSM1539660,7943280031_K,Blood,borderline MCI,British_English,80,Male,no,blood
+-,GSM1539661,7196843068_A,Blood,AD,Western European,80,Female,no,blood
+-,GSM1539662,7196843068_C,Blood,AD,British_English,78,Female,no,blood
+-,GSM1539663,7196843068_E,Blood,AD,British_English,78,Male,no,blood
+-,GSM1539664,7196843068_F,Blood,CTL,Western European,78,Male,no,blood
+-,GSM1539665,7196843068_G,Blood,AD,British English,86,Male,no,blood
+-,GSM1539666,7196843068_H,Blood,AD,Western European,84,Female,no,blood
+-,GSM1539667,7196843068_J,Blood,OTHER,British,86,Female,no,blood
+-,GSM1539668,7196843068_K,Blood,CTL,British_English,87,Female,no,blood
+-,GSM1539669,7196843068_L,Blood,MCI,Western European,82,Male,no,blood
+-,GSM1539670,7196843062_C,Blood,CTL,Western European,76,Female,no,blood
+-,GSM1539671,7196843062_D,Blood,CTL,Western European,76,Female,no,blood
+-,GSM1539672,7196843062_F,Blood,MCI,British English,88,Male,no,blood
+-,GSM1539673,7196843062_H,Blood,AD,British_English,85,Male,no,blood
+-,GSM1539674,7196843062_J,Blood,AD,British_English,76,Male,no,blood
+-,GSM1539675,7196843062_K,Blood,AD,Western European,78,Female,no,blood
+-,GSM1539676,7196843062_L,Blood,AD,Western European,86,Female,no,blood
+-,GSM1539677,7196835090_C,Blood,CTL,Western European,79,Female,no,blood
+-,GSM1539678,7196835090_E,Blood,AD,Western European,76,Female,no,blood
+-,GSM1539679,7196835090_F,Blood,CTL to AD,British English,92,Male,no,blood
+-,GSM1539680,7196835090_G,Blood,MCI,Irish,88,Male,no,blood
+-,GSM1539681,7196835090_I,Blood,MCI,Other Caucasian,72,Female,no,blood
+-,GSM1539682,7196835090_J,Blood,MCI,Other Caucasian,68,Male,no,blood
+-,GSM1539683,7196835090_K,Blood,MCI,Western European,73,Male,no,blood
+-,GSM1539684,7964814028_A,Blood,MCI,British_English,80,Female,no,blood
+-,GSM1539685,7964814028_B,Blood,CTL,Western European,79,Female,no,blood
+-,GSM1539686,7964814028_C,Blood,CTL,Western European,87,Male,no,blood
+-,GSM1539687,7964814028_E,Blood,AD,Western European,79,Female,no,blood
+-,GSM1539688,7964814028_F,Blood,MCI to CTL,British English,87,Male,no,blood
+-,GSM1539689,7964814028_J,Blood,AD,Western European,82,Male,no,blood
+-,GSM1539690,7964814028_K,Blood,MCI,Western European,80,Male,no,blood
+-,GSM1539691,7964814028_L,Blood,AD,British_English,81,Female,no,blood
+-,GSM1539692,7196843036_B,Blood,AD,Western European,83,Female,no,blood
+-,GSM1539693,7196843036_E,Blood,AD,Western European,77,Female,no,blood
+-,GSM1539694,7196843036_G,Blood,CTL,Western European,82,Female,no,blood
+-,GSM1539695,7196843036_H,Blood,borderline MCI,British_English,90,Female,no,blood
+-,GSM1539696,7196843036_J,Blood,CTL,Western European,84,Female,no,blood
+-,GSM1539697,7196843036_L,Blood,AD,Other Caucasian,85,Female,no,blood
+-,GSM1539698,7196843054_C,Blood,AD,Irish,90,Female,no,blood
+-,GSM1539699,7196843054_E,Blood,CTL,British_English,79,Male,no,blood
+-,GSM1539700,7196843054_F,Blood,MCI,Western European,78,Female,no,blood
+-,GSM1539701,7196843054_G,Blood,AD,Western European,84,Male,no,blood
+-,GSM1539702,7196843054_I,Blood,CTL,Western European,77,Female,no,blood
+-,GSM1539703,7196843054_K,Blood,AD,Western European,76,Female,no,blood
+-,GSM1539704,7196843054_L,Blood,CTL,Western European,79,Male,no,blood
+-,GSM1539705,7196843065_A,Blood,AD,Western European,81,Female,no,blood
+-,GSM1539706,7196843065_B,Blood,CTL,British,91,Male,no,blood
+-,GSM1539707,7196843065_D,Blood,CTL,Western European,80,Female,no,blood
+-,GSM1539708,7196843065_E,Blood,MCI,Western European,76,Male,no,blood
+-,GSM1539709,7196843065_G,Blood,CTL,British,81,Male,no,blood
+-,GSM1539710,7196843065_H,Blood,CTL,British_English,87,Female,no,blood
+-,GSM1539711,7196843065_I,Blood,CTL,Western European,82,Female,no,blood
+-,GSM1539712,7196843065_J,Blood,CTL,Western European,77,Female,no,blood
+-,GSM1539713,7196843065_K,Blood,AD,Western European,84,Female,no,blood
+-,GSM1539714,7348931015_B,Blood,CTL,British_English,81,Female,no,blood
+-,GSM1539715,7348931015_C,Blood,CTL,Western European,77,Female,no,blood
+-,GSM1539716,7348931015_D,Blood,CTL,British_English,78,Female,no,blood
+-,GSM1539717,7348931015_G,Blood,AD,Western European,86,Male,no,blood
+-,GSM1539718,7348931015_I,Blood,AD,Western European,85,Female,no,blood
+-,GSM1539719,7348931015_J,Blood,AD,Western European,76,Male,no,blood
+-,GSM1539720,7348931015_K,Blood,AD,Western European,86,Female,no,blood
+-,GSM1539721,7348931005_B,Blood,AD,Western European,86,Female,no,blood
+-,GSM1539722,7348931005_C,Blood,AD,Any_Other_White_Background,79,Male,no,blood
+-,GSM1539723,7348931005_G,Blood,AD,Western European,83,Male,no,blood
+-,GSM1539724,7348931005_K,Blood,MCI,Western European,85,Male,no,blood
+-,GSM1539725,7196843007_B,Blood,MCI,Any_Other_White_Background,80,Female,no,blood
+-,GSM1539726,7196843007_C,Blood,MCI,Other Caucasian,76,Female,no,blood
+-,GSM1539727,7196843007_D,Blood,AD,Western European,88,Male,no,blood
+-,GSM1539728,7196843007_H,Blood,AD,British,82,Male,no,blood
+-,GSM1539729,7196843007_I,Blood,AD,Other Caucasian,90,Female,no,blood
+-,GSM1539730,7196843007_K,Blood,MCI,Western European,82,Male,no,blood
+-,GSM1539731,7196843091_C,Blood,CTL,Western European,77,Male,no,blood
+-,GSM1539732,7196843091_D,Blood,AD,Other Caucasian,76,Female,no,blood
+-,GSM1539733,7196843091_E,Blood,AD,British_English,83,Female,no,blood
+-,GSM1539734,7196843091_G,Blood,MCI,British_English,88,Female,no,blood
+-,GSM1539735,7196843091_I,Blood,MCI,Any_Other_Black_Background,80,Male,no,blood
+-,GSM1539736,7196843091_K,Blood,AD,Western European,79,Female,no,blood
+-,GSM1539737,7196843091_L,Blood,AD,Other Caucasian,77,Female,no,blood
+-,GSM1539738,7964814064_A,Blood,CTL,British_English,77,Female,no,blood
+-,GSM1539739,7964814064_B,Blood,AD,Western European,80,Female,no,blood
+-,GSM1539740,7964814064_D,Blood,CTL,Western European,78,Male,no,blood
+-,GSM1539741,7964814064_E,Blood,MCI,Western European,82,Male,no,blood
+-,GSM1539742,7964814064_F,Blood,AD,Western European,81,Female,no,blood
+-,GSM1539743,7964814064_G,Blood,AD,Western European,83,Female,no,blood
+-,GSM1539744,7964814064_I,Blood,MCI,British English,100,Female,no,blood
+-,GSM1539745,7964814064_J,Blood,CTL,Western European,77,Male,no,blood
+-,GSM1539746,7964814064_K,Blood,AD,Western European,76,Male,no,blood
+-,GSM1539747,7196835071_E,Blood,AD,Western European,77,Male,no,blood
+-,GSM1539748,7196835071_F,Blood,AD,Western European,79,Female,no,blood
+-,GSM1539749,7196835071_I,Blood,AD,Western European,81,Male,no,blood
+-,GSM1539750,7196835071_J,Blood,borderline MCI,Irish,75,Female,no,blood
+-,GSM1539751,7196835071_K,Blood,AD,Western European,80,Male,no,blood
+-,GSM1539752,7196835071_L,Blood,AD,Western European,85,Female,no,blood
+-,GSM1539753,7348931014_B,Blood,MCI,British_English,79,Female,no,blood
+-,GSM1539754,7348931014_C,Blood,CTL,Western European,78,Female,no,blood
+-,GSM1539755,7348931014_D,Blood,MCI,Western European,83,Female,no,blood
+-,GSM1539756,7348931014_F,Blood,MCI,Caribbean,85,Female,no,blood
+-,GSM1539757,7348931014_G,Blood,CTL,Western European,84,Male,no,blood
+-,GSM1539758,7943280008_A,Blood,CTL,Western European,83,Female,no,blood
+-,GSM1539759,7943280008_B,Blood,CTL,Western European,83,Female,no,blood
+-,GSM1539760,7943280008_C,Blood,MCI,British English,84,Female,no,blood
+-,GSM1539761,7943280008_H,Blood,MCI,British English,87,Female,no,blood
+-,GSM1539762,7943280008_I,Blood,CTL,British_English,82,Male,no,blood
+-,GSM1539763,7943280008_J,Blood,AD,Western European,81,Female,no,blood
+-,GSM1539764,7943280008_K,Blood,CTL,Western European,77,Male,no,blood
+-,GSM1539765,7348931007_C,Blood,AD,Other Caucasian,76,Female,no,blood
+-,GSM1539766,7348931007_D,Blood,AD,Any_Other_White_Background,80,Female,no,blood
+-,GSM1539767,7348931007_E,Blood,AD,British_English,85,Female,no,blood
+-,GSM1539768,7348931007_F,Blood,AD,Western European,82,Female,no,blood
+-,GSM1539769,7348931007_G,Blood,AD,Western European,78,Female,no,blood
+-,GSM1539770,7348931007_H,Blood,CTL,British_English,86,Female,no,blood
+-,GSM1539771,7348931007_I,Blood,MCI,British,93,Male,no,blood
+-,GSM1539772,7348931007_J,Blood,MCI,Western European,77,Female,no,blood
+-,GSM1539773,7196843076_A,Blood,AD,Western European,81,Female,no,blood
+-,GSM1539774,7196843076_B,Blood,MCI,Western European,81,Female,no,blood
+-,GSM1539775,7196843076_C,Blood,CTL,Western European,85,Female,no,blood
+-,GSM1539776,7196843076_E,Blood,MCI,British,77,Female,no,blood
+-,GSM1539777,7196843076_I,Blood,AD,Western European,79,Male,no,blood
+-,GSM1539778,7196843076_K,Blood,AD,Western European,78,Female,no,blood
+-,GSM1539779,7196843069_A,Blood,CTL,Western European,77,Male,no,blood
+-,GSM1539780,7196843069_B,Blood,AD,Western European,80,Male,no,blood
+-,GSM1539781,7196843069_C,Blood,CTL,Western European,81,Female,no,blood
+-,GSM1539782,7196843069_D,Blood,MCI,British,93,Female,no,blood
+-,GSM1539783,7196843069_E,Blood,AD,Western European,77,Female,no,blood
+-,GSM1539784,7196843069_F,Blood,MCI,Western European,80,Female,no,blood
+-,GSM1539785,7196843069_H,Blood,AD,Western European,83,Male,no,blood
+-,GSM1539786,7196843069_I,Blood,MCI,Western European,78,Male,no,blood
+-,GSM1539787,7196843069_K,Blood,AD,Western European,79,Male,no,blood
+-,GSM1539788,7196843069_L,Blood,AD,British_English,73,Male,no,blood
+-,GSM1539789,7348931013_B,Blood,MCI,unkown but she's white and speaks english with a slight south african accent,83,Female,no,blood
+-,GSM1539790,7348931013_C,Blood,MCI,Western European,80,Female,no,blood
+-,GSM1539791,7348931013_D,Blood,MCI,British,86,Male,no,blood
+-,GSM1539792,7348931013_G,Blood,MCI,Western European,83,Female,no,blood
+-,GSM1539793,7348931013_H,Blood,MCI,Western European,83,Female,no,blood
+-,GSM1539794,7348931013_I,Blood,AD,Western European,82,Male,no,blood
+-,GSM1539795,7348931013_J,Blood,CTL,Western European,88,Male,no,blood
+-,GSM1539796,7348931013_L,Blood,CTL,British_English,86,Female,no,blood
