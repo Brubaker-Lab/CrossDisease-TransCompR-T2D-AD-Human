@@ -1,0 +1,406 @@
+---
+title: "Cross-Disease Modeling - EC PLS-DA - 88 Genes"
+author: "Brendan K. Ball"
+date: "2024-09-01"
+output: html_document
+---
+
+# 0. IMPORT PACKAGES
+```{r Package Import, include=FALSE, warning=FALSE}
+# Downloads and calls from the library the necessary packages needed to run the code
+# CRAN
+if(!require(stringr)) install.packages("stringr", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (stringr, verbose = FALSE))
+if(!require(gtools)) install.packages("gtools", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (gtools, verbose = FALSE))
+if(!require(dplyr)) install.packages("dplyr", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (dplyr, verbose = FALSE))
+if(!require(factoextra)) install.packages("factoextra", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (factoextra, verbose = FALSE))
+if(!require(devtools)) install.packages("devtools", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (devtools, verbose = FALSE))
+if(!require(data.table)) install.packages("data.table", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (data.table, verbose = FALSE))
+if(!require(tibble)) install.packages("tibble", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (tibble, verbose = FALSE))
+if(!require(lme4)) install.packages("lme4", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (lme4, verbose = FALSE))
+if(!require(emmeans)) install.packages("emmeans", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (emmeans, verbose = FALSE))
+if(!require(effects)) install.packages("effects", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (effects, verbose = FALSE))
+if(!require(ggforce)) install.packages("ggforce", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (ggforce, verbose = FALSE))
+if(!require(pheatmap)) install.packages("pheatmap", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (pheatmap, verbose = FALSE))
+if(!require(limma)) install.packages("limma", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (limma, verbose = FALSE))
+if(!require(umap)) install.packages("umap", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (umap, verbose = FALSE))
+if(!require(powerjoin)) install.packages("powerjoin", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (powerjoin, verbose = FALSE))
+if(!require(purrr)) install.packages("purrr", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (purrr, verbose = FALSE))
+if(!require(glmnet)) install.packages("glmnet", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (glmnet, verbose = FALSE))
+if(!require(tidyverse)) install.packages("tidyverse", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (tidyverse, verbose = FALSE))
+if(!require(dittoSeq)) install.packages("dittoSeq", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (dittoSeq, verbose = FALSE))
+if(!require(openxlsx)) install.packages("openxlsx", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (openxlsx, verbose = FALSE))
+if(!require(qusage)) install.packages("qusage", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (qusage, verbose = FALSE))
+if(!require(ggpubr)) install.packages("ggpubr", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (ggpubr, verbose = FALSE))
+if(!require(umap)) install.packages("umap", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (umap, verbose = FALSE))
+if(!require(corrplot)) install.packages("corrplot", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (corrplot, verbose = FALSE))
+# Bioconductor Import
+if (!requireNamespace('BiocManager', quietly = TRUE)) install.packages('BiocManager')
+suppressWarnings(library(BiocManager, verbose = FALSE))
+if (!require("fgsea")) {BiocManager::install("fgsea")}
+suppressWarnings(library (fgsea, verbose = FALSE))
+if (!require("mixOmics")) {BiocManager::install("mixOmics")}
+suppressWarnings(library (mixOmics, verbose = FALSE))
+if (!require("clusterProfiler")) {BiocManager::install("clusterProfiler")}
+suppressWarnings(library (clusterProfiler, verbose = FALSE))
+if (!require("EnrichmentBrowser")) {BiocManager::install("EnrichmentBrowser")}
+suppressWarnings(library (EnrichmentBrowser, verbose = FALSE))
+if (!require("EnhancedVolcano")) {BiocManager::install("EnhancedVolcano")}
+suppressWarnings(library (EnhancedVolcano, verbose = FALSE))
+if (!require("GEOquery")) {BiocManager::install("GEOquery")}
+suppressWarnings(library (GEOquery, verbose = FALSE))
+if (!require("orthogene")) {BiocManager::install("orthogene")}
+suppressWarnings(library (orthogene, verbose = FALSE))
+if (!require("msigdbr")) {BiocManager::install("msigdbr")}
+suppressWarnings(library (msigdbr, verbose = FALSE))
+if(!require(org.Hs.eg.db)) install.packages("org.Hs.eg.db", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (org.Hs.eg.db, verbose = FALSE))
+```
+
+# 1. IMPORT DATA SETS
+```{r GSE48350 GPL570 for Human AD Data}
+# Version info: R 4.2.2, Biobase 2.58.0, GEOquery 2.66.0, limma 3.54.0
+# load series and platform data from GEO
+
+gset <- getGEO("GSE48350", GSEMatrix =TRUE, getGPL=FALSE)
+if (length(gset) > 1) idx <- grep("GPL570", attr(gset, "names")) else idx <- 1
+gset <- gset[[idx]]
+
+ex <- exprs(gset)
+# log2 transform
+qx <- as.numeric(quantile(ex, c(0., 0.25, 0.5, 0.75, 0.99, 1.0), na.rm=T))
+LogC <- (qx[5] > 100) ||
+          (qx[6]-qx[1] > 50 && qx[2] > 0)
+if (LogC) { ex[which(ex <= 0)] <- NaN
+  ex <- log2(ex) }
+
+# box-and-whisker plot
+dev.new(width=3+ncol(gset)/6, height=5)
+par(mar=c(7,4,2,1))
+title <- paste ("GSE48350", "/", annotation(gset), sep ="")
+boxplot(ex, boxwex=0.7, notch=T, main=title, outline=FALSE, las=2)
+dev.off()
+
+# expression value distribution plot
+par(mar=c(4,4,2,1))
+title <- paste ("GSE48350", "/", annotation(gset), " value distribution", sep ="")
+plotDensities(ex, main=title, legend=F)
+
+# mean-variance trend
+ex <- na.omit(ex) # eliminate rows with NAs
+plotSA(lmFit(ex), main="Mean variance trend, GSE48350")
+
+# UMAP plot (multi-dimensional scaling)
+ex <- ex[!duplicated(ex), ]  # remove duplicates
+ump <- umap(t(ex), n_neighbors = 15, random_state = 123)
+plot(ump$layout, main="UMAP plot, nbrs=15", xlab="", ylab="", pch=20, cex=1.5)
+
+mut_human <- as.data.frame(ex)
+
+# IMPORT GPL570 CONVERSION AND GSE48350 SUBJECTID INFORMATION FOR HUMAN AD DATA
+# Import GSE48350 GPL570 Import
+GPL570conv <- read.csv("GPL570.csv")
+GPL570conv <- GPL570conv[c(1,3)]
+
+# Prepare the gene row name to be transferred to the mut_human df
+gene_row_name_human <- rownames(mut_human)
+mut_human_names <- cbind(gene_row_name_human, mut_human)
+# Make standard geneID column name for df joining
+colnames(mut_human_names)[1] <- "ID"
+# Combine the mut_human_names file into the GPL570 data conversion to create a gene list 
+mut_human_gene <- GPL570conv %>% inner_join(mut_human_names, by = 'ID', copy = TRUE)
+
+# Rename the second column Gene.Symbol to geneID
+colnames(mut_human_gene)[2] <- "geneID"
+
+# Import GSE48350 SubjectID Information
+GSE48350_subjectID <- read.csv("GSE48350_subjectID.csv")
+```
+
+```{r Import T2D PC2 from TransComp-R}
+# T2D PC2 results
+Q_T2D_GSE <- read.csv("Q_T2D_list.csv", row.names=1)
+```
+
+# 2. DATA WRANGLING & PROCESSING
+```{r Preparation of Gene List with Respective Converters}
+# Create a list for conversion of gene list
+# Function to extract string between first and second "//" for geneID
+extract_string <- function(input_string) {
+  split_string <- unlist(strsplit(input_string, " // "))
+  return(split_string[2])
+}
+
+# GENE LIST PREPARATION FOR HUMAN DATA
+# Prepare the gene row name to be transferred to the mut_human df
+gene_row_name_human <- rownames(mut_human)
+mut_human_names <- cbind(gene_row_name_human, mut_human)
+# Make standard geneID column name for df joining
+colnames(mut_human_names)[1] <- "ID"
+# Combine the mut_human_names file into the GPL6244 data conversion to create a gene list 
+mut_human_gene <- GPL570conv %>% inner_join(mut_human_names, by = 'ID', copy = TRUE)
+# Rename the second column Gene.Symbol to geneID
+colnames(mut_human_gene)[2] <- "geneID"
+```
+
+## 2.1 Gene Matching of Human Data
+```{r Match Gene Pairs of Human}
+# GENE MATCHING PREPARATION FOR HUMAN DATA
+# Rename data set
+humandat <- mut_human_gene
+# Remove the column with the ID numbers
+humandat_proc <- humandat[-1]
+# Remove any rows with NA in the geneID column
+humandat_proc <- humandat_proc %>% drop_na(geneID)
+
+# Take the transpose of the human data set
+humandat_proc_t <- t(humandat_proc)
+colnames(humandat_proc_t) <- humandat_proc_t[1,]
+humandat_proc_t <- humandat_proc_t[-1,] 
+# Convert to data frame
+humandat_proc_t <- as.data.frame(humandat_proc_t)
+# Confirm all gene words are upper case for case sensitive intersection
+names(humandat_proc_t) <- toupper(names(humandat_proc_t))
+# Confirm data sets is a data frame
+humandat_proc_t <- as.data.frame(humandat_proc_t)
+humandat_proc_int <- humandat_proc_t
+```
+
+## 2.2 Incorporation of Subject Information into Data
+```{r Attach Subject Information to the Gene Expression Data}
+# SUBJECT INFORMATION WITH HUMAN DATA FOR Xh
+# Human Data Combination
+# Move the row names to be in the first column
+humandat_proc_int <- cbind(SampleID = rownames(humandat_proc_int), humandat_proc_int)
+rownames(humandat_proc_int) <- NULL
+
+# Replace the Characteristics to the numerical value for age
+GSE48350_subjectID$Characteristics <- gsub("[^0-9]", "", GSE48350_subjectID$Characteristics)
+# Rename the characteristics column to age, then make the column numeric
+names(GSE48350_subjectID)[which(names(GSE48350_subjectID) == "Characteristics")] <- "Age"
+GSE48350_subjectID$Age <- as.numeric(GSE48350_subjectID$Age)
+# Replace any missing entries with NA, then replace the naming to "Control" - these entries are empty due to being control groups
+GSE48350_subjectID <- replace(GSE48350_subjectID, GSE48350_subjectID == "", NA)
+GSE48350_subjectID[is.na(GSE48350_subjectID)] <- "Control"
+# Create a new column "Condition" to classify the human groups into AD or Control groups
+GSE48350_subjectID$Condition <- ifelse(GSE48350_subjectID$Braak.stage == "Control", "Control", "AD")
+# Replace Gender with Sex in column name
+names(GSE48350_subjectID)[which(names(GSE48350_subjectID) == "Gender")] <- "Sex"
+# Replace Sex String with F or M (F=Female, M=Male)
+GSE48350_subjectID$Sex[GSE48350_subjectID$Sex == 'female'] <- 'F'
+GSE48350_subjectID$Sex[GSE48350_subjectID$Sex == 'male'] <- 'M'
+# Remove the excess columns not needed for analysis
+GSE48350_subjectID = GSE48350_subjectID[,!(names(GSE48350_subjectID) %in% c("Group","Title", "Source.name","Individual"))]
+# Combine the subjectID and human data to create the Xh dataset
+Xhumandat <- cbind(GSE48350_subjectID, humandat_proc_int)
+# Remove the excess columns not needed for analysis
+#Xhumandat = Xhumandat[,!(names(Xhumandat) %in% c("SampleID"))]
+# Searches for the keyword entorhinal cortex within the human data set to reduce regional-dependent variation
+Xhumandat <- Xhumandat[Xhumandat$Brain.region %in% "entorhinal cortex",]
+# Remove any age groups below 55 years old for late onset of Alzheimer's (removes "young age groups")
+Xhumandat <- subset(Xhumandat, Age>55) 
+# Make the data portions numeric
+for (i in 10:ncol(Xhumandat)) {
+  Xhumandat[,i] <- as.numeric(Xhumandat[,i])
+}
+
+# Function to calculate z-score for a vector
+calc_z_score <- function(x) {
+  (x - mean(x)) / sd(x)
+}
+
+# Loop through each column and apply the z-score transformation for mouse before PCA
+for (i in 10:ncol(Xhumandat)) {
+  Xhumandat[,i] <- calc_z_score(Xhumandat[,i])
+}
+```
+
+# 3. Data Preparation of T2D PC2 List
+```{r Select Top & Bottom 50 Genes from T2D PC2 Blood Data}
+# Prepare the Q matrix with only PC2
+Q_T2D_GSE <- as.data.frame(Q_T2D_GSE)
+Q_T2D_GSE <- dplyr::select(Q_T2D_GSE, "genelist", "PC2")
+# Get the top 50 PC scores
+top_50_PC2 <- Q_T2D_GSE %>%
+  arrange(desc(PC2)) %>%
+  slice_head(n = 50)
+# Get the bottom 50 PC scores
+bottom_50_PC2 <- Q_T2D_GSE %>%
+  arrange(PC2) %>%
+  slice_head(n = 50)
+# Combine the top 50 and bottom 50 PC scores into a single data frame
+Q_T2D_PC2 <- bind_rows(top_50_PC2, bottom_50_PC2)
+
+# Keep gene list that match from the top 50 and bottom 50 loadings in T2D PC2 
+TopBotPC2genelist <- Q_T2D_PC2$genelist
+
+# Create the filtered for each dataset
+Xhumandat_filt <- Xhumandat[, c(1:9, which(colnames(Xhumandat) %in% TopBotPC2genelist))]
+Xhumandat_filt_MW <- Xhumandat_filt
+
+# Undo log2 calculation for the AD human group
+Xhumandat_AD_base2 <- Xhumandat_filt
+Xhumandat_AD_base2[, 10:ncol(Xhumandat_AD_base2)] <- 2^(Xhumandat_AD_base2[, 10:ncol(Xhumandat_AD_base2)])
+# Identify the range of columns for the genes
+gene_columns_ADhuman <- colnames(Xhumandat_AD_base2)[10:ncol(Xhumandat_AD_base2)]
+
+# Average the groups by category
+X_humandat_ADavg <- Xhumandat_AD_base2 %>%
+  group_by(Condition) %>%
+  summarise(across(all_of(gene_columns_ADhuman), \(x) mean(x, na.rm = TRUE))) %>%
+  dplyr::select(Condition, all_of(gene_columns_ADhuman))
+# Select the control group average only
+humanAD_C_row <- X_humandat_ADavg %>% filter(Condition == "Control")
+# Select only the disease group
+Xhumandat_AD_base2 <- Xhumandat_AD_base2 %>% filter(Condition == "AD")
+
+# Keep the first columns unchanged for subject information
+Xhumandat_AD_base2_genes <- Xhumandat_AD_base2[, 1:9]
+# Extract the numeric data for each disease and control sets
+Xhumandat_AD_base2_values <- Xhumandat_AD_base2[, 10:ncol(Xhumandat_AD_base2)]
+humanAD_C_row_values <- humanAD_C_row[, 2:ncol(humanAD_C_row)]
+# Initialize dataframe
+AD_human_values <- Xhumandat_AD_base2_values
+# Perform division row by row and column by column
+for (row in 1:nrow(Xhumandat_AD_base2_values)) {
+  for (col in 1:ncol(Xhumandat_AD_base2_values)) {
+    AD_human_values[row, col] <- log2( Xhumandat_AD_base2_values[row, col] / humanAD_C_row_values[1, col] )
+  }
+}
+# Combine the subject information with gene data
+Xhumandat_AD_filt <- cbind(Xhumandat_AD_base2_genes, AD_human_values)
+
+# Remove information on conditions and group, except for subjectID
+Xhumandat_AD_filt <- Xhumandat_AD_filt[, !(colnames(Xhumandat_AD_filt) %in% c("Brain.region", "Sex", "Age", "Braak.stage", "Apoe.genotype", "Mmse", "Condition", "SampleID"))]
+
+# Set the first column as row names, and remove the original column for Both
+rownames(Xhumandat_AD_filt) <- Xhumandat_AD_filt[, 1]
+Xhumandat_AD_filt <- Xhumandat_AD_filt[, -1]
+
+# Take the transpose
+Xhumandat_AD_filt <- t(Xhumandat_AD_filt)
+Xhumandat_filt_heatmap <- Xhumandat_AD_filt
+```
+
+```{r Heatmap generation}
+# Preparation to match subject information and accession ID
+subject_ids <- colnames(Xhumandat_filt_heatmap)
+# Match the subject conditions, sex, and age with the Accession column
+subject_conditions <- GSE48350_subjectID$Condition[match(subject_ids, GSE48350_subjectID$Accession)]
+subject_sex <- GSE48350_subjectID$Sex[match(subject_ids, GSE48350_subjectID$Accession)]
+subject_age <- GSE48350_subjectID$Age[match(subject_ids, GSE48350_subjectID$Accession)]
+# Create annotation data frame
+annotation_df <- data.frame(
+  Condition = subject_conditions,
+  Sex = subject_sex,
+  Age = subject_age
+)
+# Assign rownames to match heatmap columns
+rownames(annotation_df) <- subject_ids  
+
+# Define colors for heatmap annotation
+annotation_colors <- list(
+  Condition = c("AD" = "red3", "Control" = "royalblue3"), 
+  Sex = c("M" = "#b3cde3", "F" = "#fbb4ae"), 
+  Age = colorRampPalette(c("#cbc9e2", "#54278f"))(100)
+)
+
+#svg('human_heatmap_filt_EC.svg', width = 4, height = 4)
+pheatmap(
+  Xhumandat_filt_heatmap,
+  cluster_rows = TRUE,
+  cluster_cols = FALSE,
+  color = colorRampPalette(c("dodgerblue3", "white", "firebrick2"))(100),
+  border_color = "black",
+  breaks = seq(-2.5, 2.5, length.out = 100),
+  angle_col = 90,
+  fontsize_col = 5, 
+  fontsize_row = 5,
+  annotation_col = annotation_df, 
+  annotation_colors = annotation_colors
+)
+#dev.off()
+```
+
+```{r PLS-DA Calculation with Significant Genes}
+# Filter to select the significant genes only
+gene_names <- rownames(Xhumandat_filt_heatmap)
+Xhumandat_AD_filt_sig_plsda_1 <- Xhumandat_filt[, colnames(Xhumandat_filt) %in% gene_names]
+Xhumandat_AD_filt_sig_plsda <- cbind(Xhumandat_filt[1:9], Xhumandat_AD_filt_sig_plsda_1)
+
+# Factorize the conditions
+Xhumandat_AD_filt_sig_plsda$Condition <- factor(Xhumandat_AD_filt_sig_plsda$Condition)
+
+## Cross Validation to determine the number of components for the model
+# Separate data into the specific categories (Y, disease association) and (X, dataset from genes)
+Y_AD <- as.character(Xhumandat_AD_filt_sig_plsda$Condition)
+X_AD <- Xhumandat_AD_filt_sig_plsda[10:ncol(Xhumandat_AD_filt_sig_plsda)]
+
+# Compute PLSDA for 6 components (noted as plsda_draft for multiple components)
+plsda_draft_AD <- plsda(X_AD, Y_AD, ncomp = 6)
+
+# Perform a 3-fold cross-validation repeated 10 times to evaluate classification performance
+# Noted as plsda_cv for the cross-validation analysis
+plsda_cv_AD <- perf(plsda_draft_AD, validation = 'Mfold', folds = 3, 
+                  progressBar = FALSE,  # Set to TRUE to track progress
+                  nrepeat = 100)
+# Plot the balanced error rate (BER) and the overall error
+plot(plsda_cv_AD, sd = TRUE, legend.position = 'horizontal')
+
+## Plot the PLS-DA Model
+# A two-way PLS-DA was performed with 2 components
+plsda_AD <- plsda(X_AD, Y_AD, ncomp = 2)
+
+#svg('PLSDA-human_EC_88.svg', width = 4, height = 4)
+# PLS-DA with LV1 and LV2
+par(pty="s")
+plotIndiv(plsda_AD, ind.names = FALSE, legend=FALSE,
+          comp=c(1,2), ellipse = FALSE, pch=16,
+          title = "",
+          size.title = 0.1,
+          size.legend = 0.5,
+          style="graphics",
+          cex = 1.0,
+          point.lwd = 1.5,
+          X.label = 'Scores on LV1', Y.label = 'Scores on LV2',
+          col = c("red3", "royalblue3"))
+          
+          abline(h=0, lty="dotted", col="black", lwd=2)
+          abline(v=0, lty="dotted", col="black", lwd=2)
+par(pty="m")
+#dev.off()
+```
+
+*** END OF SCRIPT ***
+
+
+
+
+
+
+
+
+
