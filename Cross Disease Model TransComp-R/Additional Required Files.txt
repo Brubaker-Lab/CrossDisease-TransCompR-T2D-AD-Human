@@ -1,6 +1,0 @@
-
-Additional Required Dataset: 
-
-c2.cp.kegg_legacy.v2023.2.Hs.symbols.gmt: This file can be accessed from the publicly available GSEA MSigDB website provided here: https://www.gsea-msigdb.org/gsea/msigdb/collections.jsp
-
-GPL570: https://purdue0-my.sharepoint.com/:x:/g/personal/bbkazu_purdue_edu/EccNHFSb-ZZHpfzfXm4xYz0Bn4Ob8KQxaccXnsM6vNBhNA?e=3sxIcr
