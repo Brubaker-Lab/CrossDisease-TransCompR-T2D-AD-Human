@@ -1,0 +1,149 @@
+---
+title: "Computational Therapeutic Screening - Cross-Disease T2D/AD"
+output: html_notebook
+---
+
+```{r Package Import}
+if(!require(ggplot2)) install.packages("ggplot2", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (ggplot2, verbose = FALSE))
+if(!require(ggpubr)) install.packages("ggpubr", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (ggpubr, verbose = FALSE))
+```
+
+```{r Computational Therapeutic Screening}
+#correlation between all drugs and diabetes loadings 
+cp_f <- filtered_cp_mean_coeff
+
+#reformat the matrix 
+row.names(cp_f) <- filtered_cp_mean_coeff$X
+cp_f <- cp_f[,-1]
+cp_f <- as.matrix(cp_f)
+
+#filter out duplicated drugs 
+unique_cp <- cp_f[!duplicated(cp_f),]
+cp_t <- t(unique_cp)
+
+#find differentially expressed drugs 
+deg_drug <- list()
+for (x in 1:ncol(cp_t)) {
+  #normalize data, z-score 
+  norm_drug <- scale(as.numeric(as.matrix(cp_t[,x])), center = TRUE, scale = TRUE)
+  row.names(norm_drug) <- row.names(cp_t) 
+  
+  #get genes for each drug p-value less than 0.05 
+  drug_pval <- 2*pnorm(q = abs(norm_drug), lower.tail= FALSE)
+  sig_drug <- drug_pval[(drug_pval <= 0.05),]
+  df_sig_drug <- as.data.frame(sig_drug)
+  
+  #get the original coefficient values from filtered drug list 
+  drug_names <- row.names(df_sig_drug)
+  filt_drug <- cp_t[c(drug_names),x]
+  #add each drug to list 
+  deg_drug[[x]] <- filt_drug
+  
+}
+#import T2D loading matrix
+Q_T2D <- read.csv("Q_T2D.csv")
+t2d <- Q_T2D
+row.names(t2d) <- Q_T2D$GeneID
+f_t2d <- t2d[,-1] 
+
+# get correlation for each drug with each T2D loading 
+alldrug_cor <- list() 
+drug_id_p <- list()
+# get the overlap genes between drug and PC loadings 
+int_dm <- list() 
+for (x in 1:length(deg_drug)) { 
+  fdrug_loading <- intersect(names(deg_drug[[x]]), row.names(f_t2d))
+  int_dm[[x]] <- fdrug_loading
+  # get only drug genes CDs 
+  fdrug <- as.data.frame(deg_drug[[x]][c(fdrug_loading)])
+  row.names(fdrug) <- fdrug_loading
+  # get only filtered loadings based on the selected genes 
+  f_loadt2d <- f_t2d[c(fdrug_loading),]
+  
+  # spearman correlation between drug genes and loading genes 
+  drug_load_cor <- apply(f_loadt2d, 2, function(x) cor.test(x, as.numeric(fdrug$`deg_drug[[x]][c(fdrug_loading)]`), method = c("spearman")))
+  alldrug_cor[[x]] <- drug_load_cor
+}
+```
+
+```{r}
+# get the drugs correlations for only PC of interest (PC2)
+pc_pvalue <- numeric(0) 
+pc_rho <- numeric(0) 
+for (i in 1:length(alldrug_cor)) { 
+  pc_idx <- 2 
+  pc_pvalue[i] <- alldrug_cor[[i]][[pc_idx]]$p.value
+  pc_rho[i] <- alldrug_cor[[i]][[pc_idx]]$estimate
+}
+
+# combine p-value and rho values 
+pc_pval_rho <- cbind(pc_pvalue, pc_rho)
+row.names(pc_pval_rho) <- colnames(cp_t)
+
+# FDR correction adjust p-value BH 
+fdr_pcpval <- p.adjust(pc_pval_rho[,1], method = c("BH"))
+pc_qval_rho <- pc_pval_rho
+pc_qval_rho[,1] <-fdr_pcpval
+colnames(pc_qval_rho)[1] <- c("pc_qvalue")
+sig_pcqval_rho <- pc_qval_rho[(pc_qval_rho[,1]<= 0.05),]
+
+rankpc_rho <- rank(sig_pcqval_rho[,2])
+rank_rho_pc <- cbind(rankpc_rho, sig_pcqval_rho)
+rank_rho_pc <- as.data.frame(rank_rho_pc)
+
+plot(rankpc_rho, sig_pcqval_rho[,2])
+
+# order the values increasing 
+or_rank_rho_pc <- rank_rho_pc[order(rank_rho_pc$rankpc_rho),]
+write.csv(or_rank_rho_pc, "PC2_alldrugs_rho.csv")
+```
+
+```{r Plots of Specific Drugs}
+# find the yellow and purple drugs 
+drug_names <- c("alogliptin","glipizide","repaglinide","sitagliptin","pioglitazone","galantamine","nateglinide","donepezil","canagliflozin","empagliflozin","linagliptin","brexpiprazole","acarbose","orlistat")
+
+# get the index of drugs of interest 
+drug_idx <- which(colnames(cp_t) %in% drug_names)
+
+#initialize empty variables
+drug_n <- c()
+file_n <- c()
+i <- 1
+drug_pc_plot <- list()
+label_list <- list()
+# j is the actual index of the drug 
+for (j in c(drug_idx)) {
+  #drug names 
+  drug_n <- append(drug_n,colnames(cp_t)[j])
+  #file names
+  file_n <- append(file_n,paste0(drug_n[i],"_pc2_unlabel.svg"))
+  
+  # plot the spearman correlation scatterplot 
+  drug_genes <- as.numeric(deg_drug[[j]][c(int_dm[[j]])])
+  loading_genes <- f_t2d[c(int_dm[[j]]),2]
+  df_pc2 <- data.frame(drug_genes,loading_genes)
+  label_list[[i]] <- int_dm[[j]]
+  
+  xlabel <- paste0("Significant ", drug_n[i], " DEGs")
+  theme_set(theme_bw()) 
+  drug_plot <- ggplot(df_pc2, aes(x=drug_genes, y=loading_genes)) + 
+    geom_hline(yintercept = 0, linetype = "dashed", color = "black") +
+    geom_vline(xintercept = 0, linetype = "dashed", color = "black") +
+    geom_point(pch=16, size=1) + labs(x=xlabel, y="PC2") +
+    theme(panel.grid = element_blank(), aspect.ratio = 1) + 
+    geom_text(aes(label = label_list[[i]]), size=1, vjust = 1.5) +
+    stat_cor(method = "spearman") 
+  #print(drug_plot)
+  drug_pc_plot[[i]] <- drug_plot
+  #update index 
+  i <- i+1
+}
+#save the plots 
+for (i in 1:length(drug_n)) {
+  svg(file_n[i], width = 5, height = 5)
+  print(drug_pc_plot[[i]])
+  dev.off()
+}
+```
