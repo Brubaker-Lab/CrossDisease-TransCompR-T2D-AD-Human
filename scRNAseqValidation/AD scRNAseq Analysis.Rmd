@@ -1,0 +1,481 @@
+---
+title: "AD Analysis Brendan"
+output: html_document
+date: "2025-04-08"
+---
+
+# Library Import
+```{r}
+# Library Import
+library(BiocManager)
+library(Seurat)
+library(tidyverse)
+library(patchwork) 
+library(dittoSeq) 
+library(stringr)
+library(gprofiler2)
+library(harmony)
+library(cowplot)
+library(openxlsx)
+library(MAST)
+library(devtools)
+#library(escape)
+home_dir <- "/mnt/vstor/SOM_PATH_DKB50/members/axb1812/AD_project"
+gc()
+Sys.setenv(TAR = "internal")
+```
+
+
+
+# Data Import
+```{r}
+counts <- readRDS(paste0(home_dir, "/GSE226602_rna_raw_counts.rds"))
+```
+
+```{r}
+seurat_list <- CreateSeuratObject(counts = counts)
+rm(counts)
+seurat_list <- SplitObject(seurat_list, split.by = "orig.ident")
+```
+
+```{r}
+samples <- names(seurat_list)
+```
+
+# Checking QC
+```{r}
+# Mitochondrial quality control
+for(i in samples){ 
+  seurat_list[[i]][["percent.mt"]] <- PercentageFeatureSet(seurat_list[[i]], pattern = "^MT-") 
+} 
+
+# RNA quality control
+for(i in samples){ 
+  seurat_list[[i]][["rna.size"]] <-   log10(Matrix::colSums(seurat_list[[i]]@assays$RNA$counts)) 
+} 
+
+```
+
+```{r}
+rna_size_min <- list() 
+rna_size_max <- list() 
+
+# Calculates min and max for rna filtering
+for(i in samples){ 
+  rna_size_min[[i]] <- median(seurat_list[[i]]@meta.data$rna.size) - (3*mad(seurat_list[[i]]@meta.data$rna.size)) 
+  
+  rna_size_max[[i]] <- median(seurat_list[[i]]@meta.data$rna.size) + (3*mad(seurat_list[[i]]@meta.data$rna.size)) 
+} 
+```
+
+```{r}
+# Visualizing quality control metrics of data
+combined <- merge(x = seurat_list[[1]], y = seurat_list[2:length(seurat_list)], merge.data=TRUE)
+# Violin Plot of rna size
+p1 <- VlnPlot(combined,"rna.size", group.by = "orig.ident", raster = FALSE)
+ggsave(filename= paste0(home_dir, "/rna_size.jpg"), width = 20, height = 20) # name the file as an EPS
+
+
+# Violin Plot of mitochondrial content
+p2 <- VlnPlot(combined,"percent.mt", group.by = "orig.ident", raster = FALSE)
+ggsave(filename= paste0(home_dir, "/percent_mt.jpg"), width = 20, height = 20) # name the file as an EPS
+rm(combined, p1, p2)
+```
+
+No QC necessary
+
+```{r include=FALSE}
+# S phase genes
+hsp_s <- cc.genes.updated.2019$s.genes
+# G2M phase genes
+hsp_g2m <- cc.genes.updated.2019$g2m.genes
+
+# Normalizes data and calculates cell-cycle scoring to be regressed
+for(i in samples){ 
+    seurat_list[[i]] <- NormalizeData(seurat_list[[i]]) 
+    seurat_list[[i]] <- CellCycleScoring(seurat_list[[i]], s.features = hsp_s, g2m.features = hsp_g2m) 
+}
+```
+
+# Running SCTransform
+```{r include=FALSE}
+options(future.globals.maxSize = 6000 * 1024^2)
+#Applies SCTransform individually to each sample 
+
+processed_list <- list()
+
+total_initial <- length(seurat_list) + length(processed_list)
+
+while (length(seurat_list) > 0) {
+  cat("Remaining objects to process:", length(seurat_list), "of", total_initial, "\n")
+  
+  # Take the first object from the list
+  obj <- seurat_list[[1]]
+  
+  # Run SCTransform on the object
+  processed_obj <- SCTransform(
+    obj,
+    method = "glmGamPoi",
+    return.only.var.genes = FALSE,
+    vars.to.regress = c("S.Score", "G2M.Score"),
+    verbose = FALSE
+  )
+  
+  # Append the processed object to the processed_list
+  processed_list[[length(processed_list) + 1]] <- processed_obj
+  
+  # Remove the first object from seurat_list
+  seurat_list <- seurat_list[-1]
+  
+  cat("Processed objects so far:", length(processed_list), "\n")
+}
+```
+
+```{r}
+# Select integration features across samples
+variable.features <- SelectIntegrationFeatures(object.list = processed_list, nfeatures = 3000)
+
+# Start with the first Seurat object
+combined <- processed_list[[1]]
+
+# Create a list with the remaining objects
+remaining_objects <- processed_list[-1]
+
+# Optionally remove the original list to free memory
+rm(processed_list)
+gc()
+
+# Merge objects sequentially while removing them from the list and printing progress
+while (length(remaining_objects) > 0) {
+  # Merge the first remaining object into 'combined'
+  combined <- merge(combined, remaining_objects[[1]])
+  
+  combined <- JoinLayers(combined, assay = "RNA")
+
+  # Remove the merged object from the list
+  remaining_objects[[1]] <- NULL
+  
+  # Print the number of objects left to merge
+  cat("Remaining objects to merge:", length(remaining_objects), "\n")
+  
+  # Prompt garbage collection to free memory
+  gc()
+}
+
+
+# Assigns variable features calculated across samples
+VariableFeatures(combined) <- variable.features 
+```
+
+
+
+
+
+```{r}
+combined <- RunPCA(combined, verbose = FALSE)
+
+p1 <- DimPlot(object = combined, reduction = "pca", pt.size = .1, group.by = "orig.ident") + NoLegend()
+
+ggsave(filename= paste0(home_dir, "/harmony_pre_umap.jpg"), width = 7, height = 7) # name the file as an EPS
+
+p2 <- VlnPlot(object = combined, features = "PC_1", group.by = "orig.ident", pt.size = 0) + NoLegend()
+
+ggsave(filename= paste0(home_dir, "/harmony_pre_vln.jpg"), width = 7, height = 7) # name the file as an EPS
+
+combined <- RunHarmony(combined, assay.use = "SCT", group.by.vars = "orig.ident", plot_convergence = FALSE) 
+
+p1 <- DimPlot(object = combined, reduction = "harmony", pt.size = .1, group.by = "orig.ident") + NoLegend()
+
+ggsave(filename= paste0(home_dir, "/harmony_post_umap.jpg"), width = 7, height = 7) # name the file as an EPS
+
+p2 <- VlnPlot(object = combined, features = "harmony_1", group.by = "orig.ident", pt.size = 0) + NoLegend()
+
+ggsave(filename= paste0(home_dir, "/harmony_post_vln.jpg"), width = 7, height = 7) # name the file as an EPS
+
+p1 <- ElbowPlot(combined, reduction = "harmony", n = 50)
+
+ggsave(filename= paste0(home_dir, "/elbowplot.jpg"), width = 7, height = 7) # name the file as an EPS
+```
+
+# Clustering
+```{r}
+#Performing Dimensional Reduction 
+# UMAP
+combined <- RunUMAP(combined, reduction = "harmony", dims = 1:25, verbose = FALSE) 
+
+# Find Neighboring cells 
+combined <- FindNeighbors(combined, reduction = "harmony", dims = 1:25, verbose = FALSE) 
+
+# knn clustering
+combined <- FindClusters(combined, resolution = 0.6, verbose = FALSE) 
+```
+
+```{r}
+p1 <- dittoDimPlot(combined, "seurat_clusters", do.label = TRUE, legend.show = FALSE, labels.size = 3, raster = FALSE) 
+ggsave(filename= paste0(home_dir, "/umap_clusters.jpg"), width = 10, height = 10) # name the file as an EPS
+
+p1 <- dittoDimPlot(combined, "orig.ident",  raster = FALSE) + NoLegend()
+ggsave(filename= paste0(home_dir, "/umap_orig.jpg"), width = 10, height = 10) # name the file as an EPS
+
+p1 <- dittoDimPlot(combined, "percent.mt",  raster = FALSE) 
+ggsave(filename= paste0(home_dir, "/umap_mt.jpg"), width = 10, height = 10) # name the file as an EPS
+```
+
+
+```{r}
+#saveRDS(combined , paste0(home_dir, "/ad_data.RData"))
+combined <- readRDS(paste0(home_dir, "/ad_data.RData"))
+```
+
+
+# Finding Sub Cluster for 14
+```{r}
+combined <- FindSubCluster(
+  combined,
+  14,
+  graph.name = "SCT_snn", 
+  subcluster.name = "sub.cluster",
+  resolution = 0.1,
+  algorithm = 1
+)
+
+Idents(combined) <- combined@meta.data$sub.cluster
+```
+
+```{r}
+p1 <- dittoDimPlot(combined, "sub.cluster",  raster = FALSE) 
+ggsave(filename= paste0(home_dir, "/umap_sub.cluster.jpg"), width = 10, height = 10) # name the file as an EPS
+```
+
+
+
+# Adding Metadata
+```{r}
+hc <- c("G1028", "G1273", "G991", "G1180", "G1279", "G598", "G780",
+        "G1020", "G968", "G781", "G1111", "G912", "G978", "G1282",
+        "G820", "G1162", "G989", "G1010", "G836", "G1200", "G970",
+        "G905")
+
+combined@meta.data$phenotype <- if_else(combined@meta.data$orig.ident %in% hc, "C", "AD")
+```
+
+
+# Finding Markers of Clusters
+```{r}
+# Get unique identifiers
+unique_idents <- as.character(unique(combined@meta.data$sub.cluster))
+unique_idents 
+
+
+markers_list <- list()
+
+# Loop over each identifier and run FindMarkers
+for (id in unique_idents) {
+  markers_list[[id]] <- FindMarkers(
+    object = combined,
+    ident.1 = id,
+    only.pos = TRUE,
+    assay = "RNA",
+    max.cells.per.ident = 500
+  )
+}
+
+saveRDS(markers_list, paste0(home_dir, "/ad_markers.RData"))
+```
+
+
+```{r}
+markers_list <- readRDS(paste0(home_dir, "/ad_markers.RData"))
+```
+
+
+```{r}
+names(markers_list)
+names(markers_list) <- c("3 - CD8+ T", "7 -Low Quality T", "0 - CD4+ T", "2 - CD4+ T", "10 - NK", "1 - NK", "4 - CD4+ T", "8 - CD8+ T",
+                         "11 - TRBV7-2+ CD4+ T", "13 - Non-classical Monocytes", "9 - Classical Monocyte", "5 - CD4+ T", "6 - B", "12 - NK",
+                         "16 - Platelet", "15 - B", "14_1 - pDCs",
+                         "14_0 - Erythroid", "14_2 - Progenitor")
+```
+
+
+
+0 - Ribosomal CD4+ T
+1 - GNLY+ NK Cells
+2 - T Cells (Naive Likely)
+3 - CD8+ T
+4 - T Cells (Naive Likely)
+5 - Macs?
+6 - B Cells
+7  - Low Quality T
+8 - CD8+ T
+9 - Classical Monocyte
+10 - NK Cells
+11 - TRBV7-2+ T
+12 - PTGDS+ NK Cells
+13 - Non-Classical Monocytes
+14_0 - Erythroid
+14_1 - pDCs
+14_2 - Progenitor
+15 - B Cells
+16 - Platelet
+
+
+
+```{r}
+# Summary Idents
+
+new_levels <- c("0", "1", "2","3" ,"4", "5", "6", "7", "8", "9", "10",
+                "11", "12", "13", "14_0", "14_1", "14_2", "15", "16")
+
+Idents(combined) <- combined@meta.data$sub.cluster 
+
+Idents(combined) <- factor(Idents(combined), levels = new_levels)
+
+new.cluster.ids <- c("CD4+ T", "NK", "CD4+ T", "CD8+ T", "CD4+ T",
+                     "CD4+ T", "B", "Low Quality", "CD8+ T", "Classical Monocyte",
+                     "NK", "TRB7-2+ T", "NK", "Non-Classical Monocytes", "Erythroid", "pDCs",
+                     "Progenitor", "B", "Platelet")
+
+names(new.cluster.ids) <- levels(combined) 
+
+combined <- RenameIdents(combined, new.cluster.ids) 
+
+combined@meta.data$summary <- Idents(combined) 
+```
+
+```{r}
+p1 <- dittoDimPlot(combined, "summary", raster = FALSE) + NoLegend()
+ggsave(filename= paste0(home_dir, "/umap_summary.svg"), width = 10, height = 10) # name the file as an EPS
+```
+
+```{r}
+saveRDS(combined , paste0(home_dir, "/ad_data.RData"))
+```
+
+
+
+# Differential Expression by Phenotype
+```{r}
+unique_celltypes <- unique(combined@meta.data$summary)
+
+marker_list <- list()
+
+for(i in unique_celltypes){
+seurat_obj <- subset(combined, subset = summary == i)
+
+Idents(seurat_obj) <- seurat_obj@meta.data$phenotype
+
+seurat_obj <- NormalizeData(seurat_obj)
+temp <- FindMarkers(seurat_obj, ident.1 = "C", ident.2 = "AD", only.pos = FALSE, assay = "RNA", logfc.threshold = 0.5, test.use = "MAST", latent.vars = "orig.ident")
+
+marker_list[[i]] <- temp
+print(paste0("Finished:", i))
+}
+
+saveRDS(marker_list, file = paste0(home_dir, "/de_condition_AD.RData"))
+```
+
+
+```{r}
+saveRDS(full_list, file = paste0(home_dir, "/de_condition_AD.RData"))
+```
+
+
+
+# Adding Module score
+```{r}
+Q_T2D_GSE <- read.csv(file = paste0(home_dir, "/Q_T2D.csv"))
+# Prepare the Q matrix with only PC2
+Q_T2D_GSE <- as.data.frame(Q_T2D_GSE)
+Q_T2D_GSE <- dplyr::select(Q_T2D_GSE, "GeneID", "PC2")
+# Get the top 50 PC scores
+top_50_PC2 <- Q_T2D_GSE %>%
+  arrange(desc(PC2)) %>%
+  slice_head(n = 50)
+# Get the bottom 50 PC scores
+bottom_50_PC2 <- Q_T2D_GSE %>%
+  arrange(PC2) %>%
+  slice_head(n = 50)
+# Combine the top 50 and bottom 50 PC scores into a single data frame
+Q_T2D_PC2 <- bind_rows(top_50_PC2, bottom_50_PC2)
+# Keep gene list that match from the top 50 and bottom 50 loadings in T2D PC2
+TopBotPC2genelist <- Q_T2D_PC2$GeneID
+```
+
+```{r}
+TopBotPC2genelist <- intersect(TopBotPC2genelist, rownames(combined))
+TopBotPC2genelist <- list(TopBotPC2genelist) # 90 Genes left after filtering for AddModuleScore
+```
+
+```{r}
+combined <- AddModuleScore(combined, features = TopBotPC2genelist, name = "PC2_score_final")
+```
+
+
+```{r}
+p1 <- dittoDimPlot(combined, "PC2_score_final1", raster = FALSE, max.color = "#F0E442", min.color = "#0072B2") + NoLegend()
+ggsave(filename= paste0(home_dir, "/umap_PC2_score.svg"), width = 10, height = 10) # name the file as an EPS
+```
+
+
+```{r}
+df <- data.frame(combined@meta.data$summary, combined@meta.data$PC2_score_final1)
+names(df) <- c("summary_type", "PC2_score")
+write.csv(df, paste0(home_dir, "/modulescore_df.csv"))
+
+```
+
+
+
+# Filtering DE for presence of PC2 Genes
+```{r}
+unique_celltypes <- names(full_list)
+
+de_list <- list()
+
+for(i in unique_celltypes){
+  temp <- full_list[[i]]
+  temp <- temp %>%
+    filter(row.names(temp) %in% TopBotPC2genelist[[1]])
+  de_list[[i]] <- temp
+}
+```
+
+
+```{r}
+saveRDS(de_list, file = paste0(home_dir, "/de_condition_pc2_filtered.RData"))
+```
+
+# Scoring cells by genes present
+```{r}
+genes_to_score <- TopBotPC2genelist[[1]]
+
+rna_counts <- GetAssayData(object = combined, assay = "RNA", slot = "counts")
+
+common_genes <- intersect(genes_to_score, rownames(rna_counts))
+if (length(common_genes) == 0) {
+  stop("None of the genes in your list are present in the Seurat object!")
+} else {
+  message("Found ", length(common_genes), " genes in common out of ", length(genes_to_score))
+}
+
+# For each cell, count how many of the genes in the common list have counts > 0 (i.e., expressed)
+gene_expression_score <- colSums(rna_counts[common_genes, ] > 0)
+
+# Add the count as a new metadata column 'gene_present'
+combined <- AddMetaData(object = combined, metadata = gene_expression_score, col.name = "gene_present")
+
+# Optional: print the head of the metadata to verify the new column
+head(combined@meta.data)
+```
+
+```{r}
+p1 <- dittoDimPlot(combined, "gene_present", raster = FALSE, max.color = "#F0E442", min.color = "#0072B2") + NoLegend()
+ggsave(filename= paste0(home_dir, "/umap_gene_found.svg"), width = 10, height = 10) # name the file as an EPS
+```
+
+
+```{r}
+sessionInfo()
+```
+
