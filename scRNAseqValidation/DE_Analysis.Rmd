@@ -1,0 +1,355 @@
+---
+title: "DE_Analysis"
+author: "Brendan Ball"
+date: "2025-04-10"
+output: html_document
+---
+
+# 0. IMPORT PACKAGES
+```{r Package Import, include=FALSE}
+# Downloads and calls from the library the necessary packages needed to run the code
+if(!require(stringr)) install.packages("stringr", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (stringr, verbose = FALSE))
+if(!require(gtools)) install.packages("gtools", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (gtools, verbose = FALSE))
+if(!require(dplyr)) install.packages("dplyr", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (dplyr, verbose = FALSE))
+if(!require(factoextra)) install.packages("factoextra", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (factoextra, verbose = FALSE))
+if(!require(devtools)) install.packages("devtools", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (devtools, verbose = FALSE))
+if(!require(data.table)) install.packages("data.table", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (data.table, verbose = FALSE))
+if(!require(tibble)) install.packages("tibble", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (tibble, verbose = FALSE))
+if(!require(lme4)) install.packages("lme4", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (lme4, verbose = FALSE))
+if(!require(emmeans)) install.packages("emmeans", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (emmeans, verbose = FALSE))
+if(!require(effects)) install.packages("effects", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (effects, verbose = FALSE))
+if(!require(ggforce)) install.packages("ggforce", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (ggforce, verbose = FALSE))
+if(!require(pheatmap)) install.packages("pheatmap", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (pheatmap, verbose = FALSE))
+if (!requireNamespace('BiocManager', quietly = TRUE))
+  install.packages('BiocManager')
+if(!require(EnhancedVolcano)) install.packages("EnhancedVolcano", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (EnhancedVolcano, verbose = FALSE)) # Imported using BiocManager::install("EnhancedVolcano")
+if(!require(GEOquery)) install.packages("GEOquery", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (GEOquery, verbose = FALSE)) # Imported using BiocManager::install("GEOquery")
+if(!require(orthogene)) install.packages("orthogene", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (orthogene, verbose = FALSE)) # Imported using BiocManager::install("orthogene")
+if(!require(limma)) install.packages("limma", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (limma, verbose = FALSE))
+if(!require(umap)) install.packages("umap", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (umap, verbose = FALSE))
+if(!require(dplyr)) install.packages("dplyr", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (dplyr, verbose = FALSE))
+if(!require(stringr)) install.packages("stringr", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (stringr, verbose = FALSE))
+if(!require(powerjoin)) install.packages("powerjoin", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (powerjoin, verbose = FALSE))
+if(!require(tidyr)) install.packages("tidyr", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (tidyr, verbose = FALSE))
+if(!require(purrr)) install.packages("purrr", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (purrr, verbose = FALSE))
+if(!require(fgsea)) install.packages("fgsea", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (fgsea, verbose = FALSE)) # Imported using BiocManager::install("fgsea")
+if(!require(glmnet)) install.packages("glmnet", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (glmnet, verbose = FALSE))
+if(!require(mixOmics)) install.packages("mixOmics", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (mixOmics, verbose = FALSE)) # Imported using BiocManager::install("mixOmics")
+if(!require(org.Hs.eg.db)) install.packages("org.Hs.eg.db", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (org.Hs.eg.db, verbose = FALSE)) # Imported using BiocManager::install("org.Hs.eg.db")
+if(!require(clusterProfiler)) install.packages("clusterProfiler", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (clusterProfiler, verbose = FALSE)) # Imported using BiocManager::install("clusterProfiler")
+if(!require(tidyverse)) install.packages("tidyverse", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (tidyverse, verbose = FALSE))
+if(!require(orthogene)) install.packages("orthogene", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (orthogene, verbose = FALSE))
+if(!require(dittoSeq)) install.packages("dittoSeq", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (dittoSeq, verbose = FALSE)) # Imported using BiocManager::install("EnhancedVolcano")
+if(!require(openxlsx)) install.packages("openxlsx", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (openxlsx, verbose = FALSE))
+if(!require(EnrichmentBrowser)) install.packages("EnrichmentBrowser", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (EnrichmentBrowser, verbose = FALSE)) # Imported using BiocManager::install("EnrichmentBrowser")
+if(!require(qusage)) install.packages("qusage", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (qusage, verbose = FALSE)) # Imported using BiocManager::install("qusage")
+if(!require(ggpubr)) install.packages("ggpubr", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (ggpubr, verbose = FALSE))
+if(!require(writexl)) install.packages("writexl", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (writexl, verbose = FALSE))
+if (!require("msigdbr")) {BiocManager::install("msigdbr")}
+suppressWarnings(library (msigdbr, verbose = FALSE))
+if(!require(reshape2)) install.packages("reshape2", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (reshape2, verbose = FALSE))
+if (!require("AnnotationDbi")) {BiocManager::install("AnnotationDbi")}
+suppressWarnings(library (AnnotationDbi, verbose = FALSE))
+if(!require(ggraph)) install.packages("ggraph", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (ggraph, verbose = FALSE))
+if(!require(igraph)) install.packages("igraph", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (igraph, verbose = FALSE))
+if(!require(tidygraph)) install.packages("tidygraph", repos = "http://cran.us.r-project.org")
+suppressWarnings(library (tidygraph, verbose = FALSE))
+```
+
+# 1. Data Import
+```{r Data Import}
+# Differential expressed gene data from scRNA-seq data
+DE_data <- readRDS("de_condition_AD.RData")
+# Import T2D PC data
+Q_T2D_GSE <- read.csv("Q_T2D.csv")
+```
+
+# 2. Data Processing
+```{r}
+# Prepare the Q matrix with only PC2
+Q_T2D_GSE <- as.data.frame(Q_T2D_GSE)
+Q_T2D_GSE <- dplyr::select(Q_T2D_GSE, "GeneID", "PC2")
+# Get the top 50 PC scores
+top_50_PC2 <- Q_T2D_GSE %>%
+  arrange(desc(PC2)) %>%
+  slice_head(n = 50)
+# Get the bottom 50 PC scores
+bottom_50_PC2 <- Q_T2D_GSE %>%
+  arrange(PC2) %>%
+  slice_head(n = 50)
+# Combine the top 50 and bottom 50 PC scores into a single data frame
+Q_T2D_PC2 <- bind_rows(top_50_PC2, bottom_50_PC2)
+# Keep gene list that match from the top 50 and bottom 50 loadings in T2D PC2
+TopBotPC2genelist <- Q_T2D_PC2$GeneID
+```
+
+```{r Determine Significant Genes per Cell Type}
+TopBotPC2genelist <- as.data.frame(TopBotPC2genelist)
+colnames(TopBotPC2genelist)[1] <- "GeneID"
+
+# CD8+ Cell
+CD8dat <- DE_data$`CD8+ T`
+CD8dat <- rownames_to_column(CD8dat, var = "GeneID")
+CD8dat_proc <- CD8dat[CD8dat$GeneID %in% TopBotPC2genelist$GeneID, ]
+
+# Exhausted T Cell
+ExTdat <- DE_data$`Low Quality/Exhausted T`
+ExTdat <- rownames_to_column(ExTdat, var = "GeneID")
+ExTdat_proc <- ExTdat[ExTdat$GeneID %in% TopBotPC2genelist$GeneID, ]
+
+# CD4+
+CD4dat <- DE_data$`CD4+ T`
+CD4dat <- rownames_to_column(CD4dat, var = "GeneID")
+CD4dat_proc <- CD4dat[CD4dat$GeneID %in% TopBotPC2genelist$GeneID, ]
+
+# NK
+NKdat <- DE_data$NK
+NKdat <- rownames_to_column(NKdat, var = "GeneID")
+NKdat_proc <- NKdat[NKdat$GeneID %in% TopBotPC2genelist$GeneID, ]
+
+# TRB7
+TRB7dat <- DE_data$`TRB7-2+ T`
+TRB7dat <- rownames_to_column(TRB7dat, var = "GeneID")
+TRB7dat_proc <- TRB7dat[TRB7dat$GeneID %in% TopBotPC2genelist$GeneID, ]
+
+# Non-Classical Monocytes
+NCmonodat <- DE_data$`Non-Classical Monocytes`
+NCmonodat <- rownames_to_column(NCmonodat, var = "GeneID")
+NCmonodat_proc <- NCmonodat[NCmonodat$GeneID %in% TopBotPC2genelist$GeneID, ]
+
+# Classical Monocytes
+Cmonodat <- DE_data$`Classical Monocyte`
+Cmonodat <- rownames_to_column(Cmonodat, var = "GeneID")
+Cmonodat_proc <- Cmonodat[Cmonodat$GeneID %in% TopBotPC2genelist$GeneID, ]
+
+# B
+Bdat <- DE_data$B
+Bdat <- rownames_to_column(Bdat, var = "GeneID")
+Bdat_proc <- Bdat[Bdat$GeneID %in% TopBotPC2genelist$GeneID, ]
+
+# Platelet
+Plateletdat <- DE_data$Platelet
+Plateletdat <- rownames_to_column(Plateletdat, var = "GeneID")
+Plateletdat_proc <- Plateletdat[Plateletdat$GeneID %in% TopBotPC2genelist$GeneID, ]
+
+# Erythroid
+Erythroiddat <- DE_data$Erythroid
+Erythroiddat <- rownames_to_column(Erythroiddat, var = "GeneID")
+Erythroiddat_proc <- Erythroiddat[Erythroiddat$GeneID %in% TopBotPC2genelist$GeneID, ]
+
+# Progenitor
+Progenitordat <- DE_data$Progenitor
+Progenitordat <- rownames_to_column(Progenitordat, var = "GeneID")
+Progenitordat_proc <- Progenitordat[Progenitordat$GeneID %in% TopBotPC2genelist$GeneID, ]
+
+# pDCs
+pDCsdat <- DE_data$pDCs
+pDCsdat <- rownames_to_column(pDCsdat, var = "GeneID")
+pDCsdat_proc <- pDCsdat[pDCsdat$GeneID %in% TopBotPC2genelist$GeneID, ]
+```
+
+# 3. Volcano Plots
+# 3.1. Erythroid Plot
+```{r Volcano plot for erythroid}
+# Of the 10 cell types, platelet and Erythroid have a noticeable number of gene expression information in Erythroid and platelets
+
+# Add a -log10(p-value) column
+Erythroiddat_proc$neg_log10_p <- -log10(Erythroiddat_proc$p_val)
+Erythroiddat_proc$significant <- with(Erythroiddat_proc, 
+                ifelse(p_val < 0.05 & abs(avg_log2FC) > 0.5, "Significant", "Not Significant"))
+
+# Plot the volcano plot
+#svg('Volcano_Erythroid.svg', width = 4, height = 4)
+ggplot(Erythroiddat_proc, aes(x = avg_log2FC, y = neg_log10_p, color = significant)) +
+  geom_point(alpha = 1, size = 1) +
+  scale_color_manual(values = c("Significant" = "red", "Not Significant" = "black")) +
+  geom_vline(xintercept = c(-0.5, 0.5), linetype = "dashed", color = "black") +
+  geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "black") +
+  labs(
+    x = "log2FC",
+    y = "-log10(p-value)"
+  ) +
+  theme_bw() +
+  theme(
+    panel.grid.major = element_blank(),  # Remove major gridlines
+    panel.grid.minor = element_blank(),   # Remove minor gridlines
+    aspect.ratio=1,
+    legend.position = "none"
+  )
+#dev.off()
+
+# Volcano plot with gene labels for significant points
+ggplot(Erythroiddat_proc, aes(x = avg_log2FC, y = neg_log10_p, color = significant)) +
+  geom_point(alpha = 1) +
+  geom_text_repel(
+    data = subset(Erythroiddat_proc, significant == "Significant"),
+    aes(label = GeneID),
+    size = 3,
+    max.overlaps = 50
+  ) +
+  scale_color_manual(values = c("Significant" = "red", "Not Significant" = "black")) +
+  geom_vline(xintercept = c(-0.5, 0.5), linetype = "dashed", color = "black") +
+  geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "black") +
+  labs(
+    x = "log2FC",
+    y = "-log10(p-value)"
+  ) +
+  theme_bw() +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    aspect.ratio = 1,
+    legend.position = "none"
+  )
+```
+
+
+# 3.2. Progenitor Plot
+```{r Volcano plot for progenitor}
+# Add a -log10(p-value) column
+Progenitordat_proc$neg_log10_p <- -log10(Progenitordat_proc$p_val)
+
+Progenitordat_proc$significant <- with(Progenitordat_proc, 
+                ifelse(p_val < 0.05 & abs(avg_log2FC) > 0.5, "Significant", "Not Significant"))
+
+# Plotting
+#svg('Volcano_Progenitor.svg', width = 4, height = 4)
+ggplot(Progenitordat_proc, aes(x = avg_log2FC, y = neg_log10_p, color = significant)) +
+  geom_point(alpha = 1) +
+  scale_color_manual(values = c("Significant" = "red", "Not Significant" = "black")) +
+  geom_vline(xintercept = c(-0.5, 0.5), linetype = "dashed", color = "black") +
+  geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "black") +
+  labs(
+    x = "log2FC",
+    y = "-log10(p-value)"
+  ) +
+  theme_bw() +
+  theme(
+    panel.grid.major = element_blank(),  # Remove major gridlines
+    panel.grid.minor = element_blank(),   # Remove minor gridlines
+    aspect.ratio=1,
+    legend.position = "none"
+  )
+#dev.off()
+
+# Volcano plot with gene labels for significant points
+ggplot(Progenitordat_proc, aes(x = avg_log2FC, y = neg_log10_p, color = significant)) +
+  geom_point(alpha = 1) +
+  geom_text_repel(
+    data = subset(Progenitordat_proc, significant == "Significant"),
+    aes(label = GeneID),
+    size = 3,
+    max.overlaps = 50
+  ) +
+  scale_color_manual(values = c("Significant" = "red", "Not Significant" = "black")) +
+  geom_vline(xintercept = c(-0.5, 0.5), linetype = "dashed", color = "black") +
+  geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "black") +
+  labs(
+    x = "log2FC",
+    y = "-log10(p-value)"
+  ) +
+  theme_bw() +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    aspect.ratio = 1,
+    legend.position = "none"
+  )
+```
+
+# 3.3. Platelet Plot
+```{r Volcano plot for platelet}
+# Add a -log10(p-value) column
+Plateletdat_proc$neg_log10_p <- -log10(Plateletdat_proc$p_val)
+
+Plateletdat_proc$significant <- with(Plateletdat_proc, 
+                ifelse(p_val < 0.05 & abs(avg_log2FC) > 0.5, "Significant", "Not Significant"))
+
+# Plotting
+#svg('Volcano_Platelet.svg', width = 4, height = 4)
+ggplot(Plateletdat_proc, aes(x = avg_log2FC, y = neg_log10_p, color = significant)) +
+  geom_point(alpha = 1) +
+  scale_color_manual(values = c("Significant" = "red", "Not Significant" = "black")) +
+  geom_vline(xintercept = c(-0.5, 0.5), linetype = "dashed", color = "black") +
+  geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "black") +
+  labs(
+    x = "log2FC",
+    y = "-log10(p-value)"
+  ) +
+  theme_bw() +
+  theme(
+    panel.grid.major = element_blank(),  # Remove major gridlines
+    panel.grid.minor = element_blank(),   # Remove minor gridlines
+    aspect.ratio=1,
+    legend.position = "none"
+  )
+#dev.off()
+
+# Volcano plot with gene labels for significant points
+ggplot(Plateletdat_proc, aes(x = avg_log2FC, y = neg_log10_p, color = significant)) +
+  geom_point(alpha = 1) +
+  geom_text_repel(
+    data = subset(Plateletdat_proc, significant == "Significant"),
+    aes(label = GeneID),
+    size = 3,
+    max.overlaps = 50
+  ) +
+  scale_color_manual(values = c("Significant" = "red", "Not Significant" = "black")) +
+  geom_vline(xintercept = c(-0.5, 0.5), linetype = "dashed", color = "black") +
+  geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "black") +
+  labs(
+    x = "log2FC",
+    y = "-log10(p-value)"
+  ) +
+  theme_bw() +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    aspect.ratio = 1,
+    legend.position = "none"
+  )
+```
+
+
+
+
+
+
